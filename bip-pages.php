@@ -53,40 +53,42 @@ function deactivate() {
 }
 
 function create_main_page() {
-  $title = 'BIP Main Page';
+  $title = __( 'BIP Main Page' );
 
-  // @TODO check if main page already exists
-
-  $current_user = wp_get_current_user();
-
-  // create main page for BIP
-  $page_args = array(
-    'post_title'    => wp_strip_all_tags( $title ),
-    'post_content'  => '',
-    'post_status'   => 'publish',
-    'post_author'   => $current_user->ID,
-    'post_type'     => 'bip',
-  );
-
-  $main_page_id = wp_insert_post( $page_args );
+  $main_page_id = post_exists( $title );
   if ( empty( $main_page_id ) ) {
-    // @FIXME throw error, something went horribly wrong
+    // create main page for BIP
+    $page_args = array(
+      'post_title'    => wp_strip_all_tags( $title ),
+      'post_content'  => '',
+      'post_status'   => 'publish',
+      'post_author'   => get_current_user_id(),
+      'post_type'     => 'bip',
+    );
+
+    $main_page_id = wp_insert_post( $page_args, true );
+  } else {
+    $page_args = array(
+      'ID' => $main_page_id,
+      'post_type' => 'bip'
+    );
+
+    $main_page_id = wp_update_post( $page_args, true );
   }
 
-  set_bip_main_page( $main_page_id );
-
-  return true;
+  if ( !is_wp_error( $main_page_id ) ) {
+    set_bip_main_page( $main_page_id );
+  }
 }
 
 function add_logo_widget() {
-  // define widget options
-  // @TODO check if option already exists
-  $widget_options = array(
-    1 => array(
-      'image_type' => 1,
-    ),
-  );
-  update_option( 'widget_bip-logo', $widget_options );
+  if ( !empty( get_option( 'widget_bip-logo' ) ) ) {
+    $widget_options = array(
+      1 => array( 'image_type' => 1 ),
+    );
+
+    update_option( 'widget_bip-logo', $widget_options );
+  }
 
   $active_widgets = get_option( 'sidebars_widgets' );
 

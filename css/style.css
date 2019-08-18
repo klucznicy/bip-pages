@@ -1,3 +1,10 @@
 .bip-page .entry-header h1:after {
   /** bip logo next to header **/
 }
+
+article.type-bip .entry-title span.bip-title-container {
+  background-image: url( '../assets/bip-logos/bip-simple-color_min.png');
+  background-position: right;
+  background-repeat: no-repeat;
+  padding-right: 30px;
+}

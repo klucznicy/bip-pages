@@ -161,6 +161,17 @@ function add_basic_main_page_data( $content ) {
 }
 add_filter('the_content', __NAMESPACE__ . '\add_basic_main_page_data' );
 
+/** display and styling **/
+function add_title_container( $title, $id = null ) {
+    $post = get_post( $id );
+    if ( $post->post_type == 'bip' ) {
+        $title = "<span class='bip-title-container'>" . $title . "</span>";
+    }
+
+    return $title;
+}
+add_filter( 'the_title', __NAMESPACE__ . '\add_title_container', 10, 2 );
+
 /** auxiliary **/
 add_filter( 'display_post_states', __NAMESPACE__ . '\mark_bip_main_page', 10, 2 );
 function mark_bip_main_page( $post_states, $post ) {

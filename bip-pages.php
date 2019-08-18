@@ -118,12 +118,12 @@ function register_bip_page_type() {
         'name'                  => _x( 'BIP pages', 'Post type general name', 'textdomain' ),
         'singular_name'         => _x( 'BIP page', 'Post type singular name', 'textdomain' ),
         'menu_name'             => _x( 'BIP Pages', 'Admin Menu text', 'textdomain' ),
-        'name_admin_bar'        => _x( 'Book', 'Add New on Toolbar', 'textdomain' ),
+        'name_admin_bar'        => _x( 'BIP page', 'Add New on Toolbar', 'textdomain' ),
         'add_new'               => __( 'Add New', 'textdomain' ),
         'add_new_item'          => __( 'Add New BIP page', 'textdomain' ),
         'new_item'              => __( 'New BIP page', 'textdomain' ),
         'edit_item'             => __( 'Edit BIP page', 'textdomain' ),
-        'view_item'             => __( 'View Book', 'textdomain' ),
+        'view_item'             => __( 'View BIP page', 'textdomain' ),
         'all_items'             => __( 'All BIP pages', 'textdomain' ),
         'search_items'          => __( 'Search BIP pages', 'textdomain' ),
         'parent_item_colon'     => __( 'Parent BIP pages:', 'textdomain' ),
@@ -142,8 +142,9 @@ function register_bip_page_type() {
         'hierarchical'       => true,
         'menu_icon'          => plugin_dir_url( __FILE__ ) . 'assets/bip-settings-icon.png',
         'menu_position'      => 21,
-        'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
-        'delete_with_user'   => false
+        'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'revisions' ),
+        'delete_with_user'   => false,
+        'show_in_rest'       => true
     );
 
     register_post_type( 'bip', $args );

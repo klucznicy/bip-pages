@@ -164,11 +164,15 @@ function set_bip_main_page( $id ) {
 }
 
 function add_basic_main_page_data( $content ) {
+  global $bip_main_page_content;
+
+  $bip_main_page_content = $content;
+
   $post = get_post();
   if ( $post->ID == get_bip_main_page() ) {
     ob_start();
     require( __DIR__ . '/templates/bip-main-template.php' );
-    $content = ob_get_clean() . $content;
+    $content = ob_get_clean();
   }
 
   return $content;

@@ -2,9 +2,29 @@
   /** bip logo next to header **/
 }
 
-article.type-bip .entry-title span.bip-title-container {
-  background-image: url( '../assets/bip-logos/bip-simple-color_min.png');
+article.type-bip .entry-title > span.bip-title-container,
+article.type-bip .entry-title > a {
+  background-image: url( '../assets/bip-logos/bip-simple-color_500px.png');
+  background-size: 40px;
   background-position: right;
   background-repeat: no-repeat;
-  padding-right: 30px;
+  padding-right: 45px;
+}
+
+.bip-footer p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.bip-main-logo {
+  float: right;
+}
+
+.bip-address {
+  margin: 1em 0;
+  font-style: normal;
+}
+
+.bip-address p {
+  margin: 0;
 }

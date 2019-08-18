@@ -127,21 +127,12 @@ function main_page_phone_callback() {
   build_input('phone', 'tel', __('Phone number to your organization'));
 }
 
-/** add settings link to plugins **/
-add_filter('plugin_action_links', __NAMESPACE__ . '\action_links', 10, 2);
-function action_links( $links, $plugin_file ) {
-  // @TODO change this to something more elegant
-  if ( $plugin_file == 'bip-for-wordpress/bip-pages.php' ) {
-    $settings_url = get_settings_url();
-    $links[] = "<a href='{$settings_url}'>" . __( 'Settings', 'bip-pages' ) . "</a>";
-  }
-  return $links;
-}
+
 function get_settings_url( Array $options = array() ) {
   $query = http_build_query(
     array_merge( ['post_type' => 'bip', 'page' => PAGE_NAME], $options )
   );
-  
+
   return admin_url( 'edit.php?' . $query );
 }
 

@@ -28,6 +28,14 @@ function plugin_init() {
   include( 'bip-logo-widget.php' );
 }
 
+/** add settings link to plugins **/
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), __NAMESPACE__ . '\action_links', 10, 2);
+function action_links( $links, $plugin_file ) {
+  $settings_url = Settings\get_settings_url();
+  $links[] = "<a href='{$settings_url}'>" . __( 'Settings', 'bip-pages' ) . "</a>";
+  return $links;
+}
+
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\register_css');
 function register_css() {
   wp_enqueue_style( PAGE_TEMPLATE_NAME, plugin_dir_url( __FILE__ ) . 'css/style.css' );
@@ -39,6 +47,13 @@ function activate() {
   add_option('Activated_Plugin','bip-pages');
   create_main_page();
   add_logo_widget();
+}
+
+register_deactivation_hook( __FILE__, __NAMESPACE__ . '\deactivate' );
+function deactivate() {
+  // @TODO add deactivation cleanup
+  // 1. remove widget
+  // 2. turn all bip pages to regular pages
 }
 
 function create_main_page() {

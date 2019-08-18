@@ -190,6 +190,16 @@ function add_title_container( $title, $id = null ) {
 }
 add_filter( 'the_title', __NAMESPACE__ . '\add_title_container', 10, 2 );
 
+function add_post_class( $classes, $class = '', $post_id = '' ) {
+  $post = get_post();
+  if ( $post->post_type == 'bip' ) {
+    $classes[] = 'type-page';
+  }
+
+  return $classes;
+}
+add_filter( 'post_class', __NAMESPACE__ . '\add_post_class' );
+
 /** auxiliary **/
 add_filter( 'display_post_states', __NAMESPACE__ . '\mark_bip_main_page', 10, 2 );
 function mark_bip_main_page( $post_states, $post ) {

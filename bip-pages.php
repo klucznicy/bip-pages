@@ -38,8 +38,7 @@ register_activation_hook( __FILE__, __NAMESPACE__ . '\activate' );
 function activate() {
   add_option('Activated_Plugin','bip-pages');
   create_main_page();
-  // @TODO automatically add logo widget on activation?
-
+  add_logo_widget();
 }
 
 function create_main_page() {
@@ -66,6 +65,27 @@ function create_main_page() {
   set_bip_main_page( $main_page_id );
 
   return true;
+}
+
+function add_logo_widget() {
+  // define widget options
+  // @TODO check if option already exists
+  $widget_options = array(
+    1 => array(
+      'image_type' => 1,
+    ),
+  );
+  update_option( 'widget_bip-logo', $widget_options );
+
+  $active_widgets = get_option( 'sidebars_widgets' );
+
+  $first_sidebar = array_slice( $active_widgets, 1, 1 );
+
+  array_unshift( $first_sidebar, 'bip-logo-1' );
+
+  $updated_widgets = array_merge( $active_widgets, $first_sidebar );
+
+  update_option( 'sidebars_widgets', $updated_widgets );
 }
 
 add_action('admin_init', __NAMESPACE__ . '\post_activation_flow');

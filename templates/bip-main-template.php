@@ -1,7 +1,9 @@
 <?php $options = get_option( BipPages\Settings\OPTION_NAME ); ?>
 <img src="<?= plugin_dir_url( __FILE__ ) ?>../assets/bip-logos/bip-color-pl_min.png"
-	alt="<?= __( 'Biuletyn Informacji Publicznej' ) ?>"
+	alt="<?= _e( 'Biuletyn Informacji Publicznej' ) ?>"
 />
+
+<?php require( 'bip-search-form.php' ); ?>
 
 <address>
 	<p><?= _e( 'Address:' ) ?> <?= $options['address'] ?></p>

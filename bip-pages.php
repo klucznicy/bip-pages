@@ -10,10 +10,6 @@ namespace BipPages;
  * Domain Path: /languages
  */
 
-const PAGE_TEMPLATE_NAME = 'bip-page-template';
-// @TODO create i18n file
-// @TODO translate into Polish
-
 /** Basic Plugin Config **/
 add_action('plugins_loaded', __NAMESPACE__ . '\plugin_init');
 function plugin_init() {
@@ -38,7 +34,7 @@ function action_links( $links, $plugin_file ) {
 
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\register_css');
 function register_css() {
-  wp_enqueue_style( PAGE_TEMPLATE_NAME, plugin_dir_url( __FILE__ ) . 'css/style.css' );
+  wp_enqueue_style( 'bip-pages', plugin_dir_url( __FILE__ ) . 'css/style.css' );
 }
 
 /** BIP Page activation flow **/
@@ -139,7 +135,7 @@ function register_bip_page_type() {
         'publicly_queryable' => true,
         'show_ui'            => true,
         'show_in_menu'       => true,
-        'capability_type'    => 'post', // @TODO fix this access control – replace with bip
+        'capability_type'    => 'post',
         'has_archive'        => true,
         'hierarchical'       => true,
         'menu_icon'          => plugin_dir_url( __FILE__ ) . 'assets/bip-settings-icon.png',

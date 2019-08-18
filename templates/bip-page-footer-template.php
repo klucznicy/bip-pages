@@ -1,7 +1,5 @@
-<!-- bip footer -->
-<footer class="entry-footer">
+<footer class="entry-footer bip-footer">
   <p>
-    <?php // @TODO change prep by link to be distinct from author link ?>
     <?= _e( sprintf('Information prepared by: %s', get_the_author_link() ), 'bip-pages' ) ?>
   </p>
   <p>
@@ -9,12 +7,12 @@
   </p>
   <p>
     <?= _e( sprintf(
-      'Date of page creation: %s at %s', get_the_date(), get_the_time()
+      'Page created: <time>%s at %s</time>', get_the_date(), get_the_time()
     ), 'bip-pages' ) ?>
   </p>
   <p>
     <?= _e( sprintf(
-      'Date last updated: %s at %s', get_the_modified_date(), get_the_modified_time()
+      'Last updated: <time>%s at %s</time>', get_the_modified_date(), get_the_modified_time()
     ), 'bip-pages' ) ?>
   </p>
 </footer>

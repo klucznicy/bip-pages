@@ -150,6 +150,3 @@ function build_input( $id, $type = 'text', $placeholder = '', $pattern = false )
 
   printf( $element, !empty( $values[$id] ) ? $values[$id] : '' );
 }
-
-// @TODO detect authors' display settings (should be Name Surname)
-// @TODO bip logo selection in settings

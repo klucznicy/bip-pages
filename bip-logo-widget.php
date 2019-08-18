@@ -15,11 +15,7 @@ class BIP_Logo_Widget extends WP_Widget {
     );
 
     public function widget( $args, $instance ) {
-
-        $options = get_option( BipPages\Settings\OPTION_NAME );
-        // @TODO error handling
-        $bip_main_page = get_post( $options['id'] );
-        $bip_main_page_url = get_permalink( $bip_main_page );
+        $bip_main_page_url = get_permalink( BipPages\get_bip_main_page() );
 
         $alt = __('BIP naszej organizacji', 'bip-pages');
 
@@ -30,8 +26,7 @@ class BIP_Logo_Widget extends WP_Widget {
 
         switch ($instance['image_type']) {
           default:
-            // @TODO make default logo bigger
-            echo "<img src='" . plugin_dir_url( __FILE__ ) . "assets/bip-logos/bip-simple-color_min.png' alt='{$alt}' />";
+            echo "<img src='" . plugin_dir_url( __FILE__ ) . "assets/bip-logos/bip-small-2-color-pl_500px.png' alt='{$alt}' />";
             break;
         }
 
@@ -39,24 +34,13 @@ class BIP_Logo_Widget extends WP_Widget {
         echo '</div>';
 
         echo $args['after_widget'];
-
     }
 
     public function form( $instance ) {
+        echo '<p>' . __( 'This widget displays the BIP logo with a link to your BIP main page, as shown below.') . '</p>';
 
-        $text = ! empty( $instance['image_type'] ) ? $instance['image_type'] : 0;
-        ?>
-        <p>
-            <label for="<?= esc_attr( $this->get_field_id( 'image_type' ) ); ?>">
-              <?= esc_html__( 'Image type:', 'bip-pages' ); ?>
-            </label>
-            <input type="radio"
-              id="<?= esc_attr( $this->get_field_id( 'image_type' ) ); ?>"
-              name="<?= esc_attr( $this->get_field_name( 'image_type' ) ); ?>"
-            />
-        </p>
-        <?php
-
+        $alt = __('BIP naszej organizacji', 'bip-pages');
+        echo "<img src='" . plugin_dir_url( __FILE__ ) . "assets/bip-logos/bip-small-2-color-pl_500px.png' alt='{$alt}'  width='166' />";
     }
 
     public function update( $new_instance, $old_instance ) {

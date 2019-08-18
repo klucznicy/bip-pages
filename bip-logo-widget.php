@@ -1,8 +1,4 @@
 <?php
-// @TODO 1) logo (znak graficzny) BIP, umieszczone w górnej części strony;
-
-// @TODO automatically add logo widget on activation?
-
 class BIP_Logo_Widget extends WP_Widget {
 
     function __construct() {
@@ -11,11 +7,6 @@ class BIP_Logo_Widget extends WP_Widget {
             'bip-logo',  // Base ID
             'BIP Logo Widget'   // Name
         );
-
-        // @TODO move widget init out of class definition
-        add_action( 'widgets_init', function() {
-            register_widget( 'BIP_Logo_Widget' );
-        });
     }
 
     public $args = array(
@@ -38,12 +29,8 @@ class BIP_Logo_Widget extends WP_Widget {
         echo "<a href='{$bip_main_page_url}'>";
 
         switch ($instance['image_type']) {
-          case 1:
-            // option 1: logo + text
-            echo "<img src='" . plugin_dir_url( __FILE__ ) . "assets/bip-logos/bip-simple-color_min.png' alt='{$alt}' />";
-            break;
-
           default:
+            // @TODO make default logo bigger
             echo "<img src='" . plugin_dir_url( __FILE__ ) . "assets/bip-logos/bip-simple-color_min.png' alt='{$alt}' />";
             break;
         }
@@ -82,4 +69,6 @@ class BIP_Logo_Widget extends WP_Widget {
     }
 
 }
-$my_widget = new BIP_Logo_Widget();
+add_action( 'widgets_init', function() {
+    register_widget( 'BIP_Logo_Widget' );
+});

@@ -11,8 +11,6 @@ namespace BipPages;
  */
 
 const PAGE_TEMPLATE_NAME = 'bip-page-template';
-// @TODO automatically add BIP link to menu on activation
-// @TODO add logo through css to BIP link in menu
 // @TODO create i18n file
 // @TODO translate into Polish
 
@@ -40,6 +38,7 @@ register_activation_hook( __FILE__, __NAMESPACE__ . '\activate' );
 function activate() {
   add_option('Activated_Plugin','bip-pages');
   create_main_page();
+  // @TODO automatically add logo widget on activation?
 
 }
 

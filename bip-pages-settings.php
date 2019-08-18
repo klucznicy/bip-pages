@@ -5,7 +5,6 @@ const PAGE_NAME = 'bip-pages-admin';
 const OPTION_NAME = 'bip-pages';
 
 function register_options_page() {
-
   add_submenu_page(
     'edit.php?post_type=bip',
     __( 'BIP Pages Settings' ),
@@ -14,7 +13,6 @@ function register_options_page() {
     PAGE_NAME,
     __NAMESPACE__ . '\create_admin_page'
   );
-
 }
 add_action( 'admin_menu', __NAMESPACE__ . '\register_options_page' );
 
@@ -126,7 +124,6 @@ function main_page_email_callback() {
 function main_page_phone_callback() {
   build_input('phone', 'tel', __('Phone number to your organization'));
 }
-
 
 function get_settings_url( Array $options = array() ) {
   $query = http_build_query(

@@ -182,7 +182,7 @@ add_filter('the_content', __NAMESPACE__ . '\add_basic_main_page_data' );
 /** display and styling **/
 function add_title_container( $title, $id = null ) {
     $post = get_post( $id );
-    if ( $post->post_type == 'bip' ) {
+    if ( is_singular( 'bip' ) || ( is_search() && $post->post_type == 'bip' ) ) {
         $title = "<span class='bip-title-container'>" . $title . "</span>";
     }
 

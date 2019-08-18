@@ -47,9 +47,31 @@ function activate() {
 
 register_deactivation_hook( __FILE__, __NAMESPACE__ . '\deactivate' );
 function deactivate() {
-  // @TODO add deactivation cleanup
-  // 1. remove widget
-  // 2. turn all bip pages to regular pages
+  // remove widget data
+  delete_option( 'widget_bip-logo' );
+  $active_widgets = get_option( 'sidebars_widgets' );
+
+  foreach ( $active_widgets as $key => $val ) {
+    if ( empty( $val ) || !is_array( $val ) ) {
+      continue;
+    }
+
+    $widget_ids = array_flip( $val );
+
+    foreach ( $widget_ids as $widget => $id ) {
+      if ( strpos( $widget, 'bip-logo-' ) === 0 ) {
+        unset( $active_widgets[$key][$id] );
+      }
+    }
+  }
+
+  update_option( 'sidebars_widgets', $active_widgets );
+
+  // turn all bip pages to regular pages
+  $bip_pages = get_pages( ['post_type' => 'bip'] );
+  foreach ( $bip_pages as $id ) {
+    wp_update_post( $id, ['post_type' => 'page' ] );
+  }
 }
 
 function create_main_page() {

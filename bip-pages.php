@@ -75,7 +75,7 @@ function deactivate() {
 }
 
 function create_main_page() {
-  $title = __( 'BIP Main Page' );
+  $title = __( 'BIP Main Page', 'bip-pages' );
 
   $main_page_id = post_exists( $title );
   if ( empty( $main_page_id ) ) {
@@ -137,20 +137,20 @@ function post_activation_flow() {
 /** BIP page type registration **/
 function register_bip_page_type() {
     $labels = array(
-        'name'                  => _x( 'BIP pages', 'Post type general name', 'textdomain' ),
-        'singular_name'         => _x( 'BIP page', 'Post type singular name', 'textdomain' ),
-        'menu_name'             => _x( 'BIP Pages', 'Admin Menu text', 'textdomain' ),
-        'name_admin_bar'        => _x( 'BIP page', 'Add New on Toolbar', 'textdomain' ),
-        'add_new'               => __( 'Add New', 'textdomain' ),
-        'add_new_item'          => __( 'Add New BIP page', 'textdomain' ),
-        'new_item'              => __( 'New BIP page', 'textdomain' ),
-        'edit_item'             => __( 'Edit BIP page', 'textdomain' ),
-        'view_item'             => __( 'View BIP page', 'textdomain' ),
-        'all_items'             => __( 'All BIP pages', 'textdomain' ),
-        'search_items'          => __( 'Search BIP pages', 'textdomain' ),
-        'parent_item_colon'     => __( 'Parent BIP pages:', 'textdomain' ),
-        'not_found'             => __( 'No BIP pages found.', 'textdomain' ),
-        'not_found_in_trash'    => __( 'No BIP pages found in Trash.', 'textdomain' ),
+        'name'                  => _x( 'BIP pages', 'Post type general name', 'bip-pages' ),
+        'singular_name'         => _x( 'BIP page', 'Post type singular name', 'bip-pages' ),
+        'menu_name'             => _x( 'BIP Pages', 'Admin Menu text', 'bip-pages' ),
+        'name_admin_bar'        => _x( 'BIP page', 'Add New on Toolbar', 'bip-pages' ),
+        'add_new'               => __( 'Add New', 'bip-pages' ),
+        'add_new_item'          => __( 'Add New BIP page', 'bip-pages' ),
+        'new_item'              => __( 'New BIP page', 'bip-pages' ),
+        'edit_item'             => __( 'Edit BIP page', 'bip-pages' ),
+        'view_item'             => __( 'View BIP page', 'bip-pages' ),
+        'all_items'             => __( 'All BIP pages', 'bip-pages' ),
+        'search_items'          => __( 'Search BIP pages', 'bip-pages' ),
+        'parent_item_colon'     => __( 'Parent BIP pages:', 'bip-pages' ),
+        'not_found'             => __( 'No BIP pages found.', 'bip-pages' ),
+        'not_found_in_trash'    => __( 'No BIP pages found in Trash.', 'bip-pages' ),
     );
 
     $args = array(
@@ -226,7 +226,7 @@ add_filter( 'post_class', __NAMESPACE__ . '\add_post_class' );
 add_filter( 'display_post_states', __NAMESPACE__ . '\mark_bip_main_page', 10, 2 );
 function mark_bip_main_page( $post_states, $post ) {
   if( $post->ID == get_bip_main_page() ) {
-  	$post_states[] = __( 'BIP Main Page' );
+  	$post_states[] = __( 'BIP Main Page', 'bip-pages' );
 	}
 	return $post_states;
 }

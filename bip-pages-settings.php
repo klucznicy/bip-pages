@@ -7,8 +7,8 @@ const OPTION_NAME = 'bip-pages';
 function register_options_page() {
   add_submenu_page(
     'edit.php?post_type=bip',
-    __( 'BIP Pages Settings' ),
-    __( 'BIP Pages Settings' ),
+    __( 'BIP Pages Settings', 'bip-pages' ),
+    __( 'BIP Pages Settings', 'bip-pages' ),
     'manage_options',
     PAGE_NAME,
     __NAMESPACE__ . '\create_admin_page'
@@ -32,14 +32,14 @@ function page_init() {
 
   add_settings_section(
     'bip_pages_settings_main_page', // ID
-    __('BIP Main Page settings'), // Title
+    __('BIP Main Page settings', 'bip-pages'), // Title
     '', // Callback (for help text if needed)
     'bip-pages-admin' // Page
   );
 
   add_settings_field(
     'bip_pages_main_page_id', // ID
-    __('BIP Main Page'), // Title
+    __('BIP Main Page', 'bip-pages'), // Title
     __NAMESPACE__ . '\main_page_id_callback', // Callback
     PAGE_NAME, // Page
     'bip_pages_settings_main_page' // Section
@@ -47,7 +47,7 @@ function page_init() {
 
   add_settings_field(
     'bip_pages_main_page_address',
-    __('Organization Address'),
+    __('Organization Address', 'bip-pages'),
     __NAMESPACE__ . '\main_page_address_callback',
     PAGE_NAME,
     'bip_pages_settings_main_page'
@@ -55,7 +55,7 @@ function page_init() {
 
   add_settings_field(
     'bip_pages_main_page_email',
-    __('E-Mail Address'),
+    __('E-Mail Address', 'bip-pages'),
     __NAMESPACE__ . '\main_page_email_callback',
     PAGE_NAME,
     'bip_pages_settings_main_page'
@@ -63,7 +63,7 @@ function page_init() {
 
   add_settings_field(
     'bip_pages_main_page_phone',
-    __('Telephone Number'),
+    __('Phone Number', 'bip-pages'),
     __NAMESPACE__ . '\main_page_phone_callback',
     PAGE_NAME,
     'bip_pages_settings_main_page'
@@ -71,7 +71,7 @@ function page_init() {
 
   add_settings_field(
     'bip_pages_main_page_rep',
-    __('Name of representative'),
+    __('Name of representative', 'bip-pages'),
     __NAMESPACE__ . '\main_page_rep_callback',
     PAGE_NAME,
     'bip_pages_settings_main_page'
@@ -99,7 +99,7 @@ function sanitize( $input ) {
 
 function main_page_id_callback() {
   $args = [
-    'show_option_none' => __('Not selected'),
+    'show_option_none' => __('Not selected', 'bip-pages'),
     'option_none_value' => 0,
     'name' => OPTION_NAME . "[id]",
     'id' => OPTION_NAME . "[id]",
@@ -110,19 +110,19 @@ function main_page_id_callback() {
 }
 
 function main_page_address_callback() {
-  build_input('address', 'text', __('The address of your organization'));
+  build_input('address', 'text', __('The address of your organization', 'bip-pages'));
 }
 
 function main_page_rep_callback() {
-  build_input('rep', 'text', __('Full name of a BIP editor'));
+  build_input('rep', 'text', __('Full name of a BIP editor', 'bip-pages'));
 }
 
 function main_page_email_callback() {
-  build_input('email', 'email', __('Email to a BIP editor'));
+  build_input('email', 'email', __('Email to a BIP editor', 'bip-pages'));
 }
 
 function main_page_phone_callback() {
-  build_input('phone', 'tel', __('Phone number to your organization'));
+  build_input('phone', 'tel', __('Phone number to your organization', 'bip-pages'));
 }
 
 function get_settings_url( Array $options = array() ) {

@@ -1,18 +1,21 @@
 <footer class="entry-footer bip-footer">
   <p>
-    <?= _e( sprintf('Information prepared by: %s', get_the_author_link() ), 'bip-pages' ) ?>
+    <?= sprintf(
+      __( 'Information prepared by: %s', 'bip-pages' ), get_the_author_link() ) ?>
   </p>
   <p>
-    <?= _e( sprintf('Published by: %s', get_the_author_link() ), 'bip-pages' ) ?>
+    <?= sprintf( __( 'Published by: %s', 'bip-pages' ), get_the_author_link() ) ?>
   </p>
   <p>
-    <?= _e( sprintf(
-      'Page created: <time>%s at %s</time>', get_the_date(), get_the_time()
-    ), 'bip-pages' ) ?>
+    <?= sprintf(
+      __( 'Page created: <time>%s at %s</time>', 'bip-pages' ),
+      get_the_date(), get_the_time()
+    ) ?>
   </p>
   <p>
-    <?= _e( sprintf(
-      'Last updated: <time>%s at %s</time>', get_the_modified_date(), get_the_modified_time()
-    ), 'bip-pages' ) ?>
+    <?= sprintf(
+      __( 'Last updated: <time>%s at %s</time>', 'bip-pages' ),
+      get_the_modified_date(), get_the_modified_time()
+    ) ?>
   </p>
 </footer>

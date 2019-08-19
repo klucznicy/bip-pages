@@ -54,5 +54,5 @@ class BIP_Logo_Widget extends WP_Widget {
 
 }
 add_action( 'widgets_init', function() {
-    register_widget( 'BIP_Logo_Widget' );
+    register_widget( 'BIP_Logo_Widget', 'bip-pages' );
 });

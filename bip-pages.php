@@ -42,6 +42,7 @@ register_activation_hook( __FILE__, __NAMESPACE__ . '\activate' );
 function activate() {
   add_option('Activated_Plugin','bip-pages');
   create_main_page();
+  create_instructions_page();
   add_logo_widget();
 }
 
@@ -74,12 +75,10 @@ function deactivate() {
   }
 }
 
-function create_main_page() {
-  $title = __( 'BIP Main Page', 'bip-pages' );
-
-  $main_page_id = post_exists( $title );
-  if ( empty( $main_page_id ) ) {
-    // create main page for BIP
+function create_page( $title, $content = '' ) {
+  $page_id = post_exists( $title );
+  if ( empty( $page_id ) ) {
+    // create page with bip post_type
     $page_args = array(
       'post_title'    => wp_strip_all_tags( $title ),
       'post_content'  => '',
@@ -88,18 +87,41 @@ function create_main_page() {
       'post_type'     => 'bip',
     );
 
-    $main_page_id = wp_insert_post( $page_args, true );
+    $page_id = wp_insert_post( $page_args, true );
   } else {
     $page_args = array(
-      'ID' => $main_page_id,
+      'ID' => $page_id,
       'post_type' => 'bip'
     );
 
-    $main_page_id = wp_update_post( $page_args, true );
+    $page_id = wp_update_post( $page_args, true );
   }
+
+  return $page_id;
+}
+
+function create_main_page() {
+  $title = __( 'BIP Main Page', 'bip-pages' );
+
+  $main_page_id = create_page( $title );
 
   if ( !is_wp_error( $main_page_id ) ) {
     set_bip_main_page( $main_page_id );
+  }
+}
+
+function create_instructions_page() {
+  $title = __( 'BIP usage manual', 'bip-pages' );
+
+  // Polish only for now
+  $instructions = file_get_contents( 'bip-usage-manual-pl.txt' );
+
+  $instruction_page_id = create_page( $title, $instructions );
+
+  if ( !is_wp_error( $instruction_page_id ) ) {
+    $option = get_option( Settings\OPTION_NAME, array() );
+    $option['instruction_id'] = $instruction_page_id;
+    update_option( Settings\OPTION_NAME, $option );
   }
 }
 
@@ -180,9 +202,9 @@ function get_bip_main_page() {
 }
 
 function set_bip_main_page( $id ) {
-  $option = get_option( OPTION_NAME, array() );
+  $option = get_option( Settings\OPTION_NAME, array() );
   $option['id'] = $id;
-  update_option( OPTION_NAME, $option );
+  update_option( Settigs\OPTION_NAME, $option );
 }
 
 function add_basic_main_page_data( $content ) {

@@ -77,6 +77,14 @@ function page_init() {
     'bip_pages_settings_main_page'
   );
 
+  add_settings_field(
+    'bip_pages_instruction_id',
+    __('Name of representative', 'bip-pages'),
+    __NAMESPACE__ . '\instruction_page_callback',
+    PAGE_NAME,
+    'bip_pages_settings_main_page'
+  );
+
 }
 add_action( 'admin_init', __NAMESPACE__ . '\page_init' );
 
@@ -104,6 +112,18 @@ function main_page_id_callback() {
     'name' => OPTION_NAME . "[id]",
     'id' => OPTION_NAME . "[id]",
     'selected' => \BipPages\get_bip_main_page(),
+    'post_type' => 'bip'
+  ];
+  wp_dropdown_pages( $args );
+}
+
+function instruction_page_callback() {
+  $args = [
+    'show_option_none' => __('Not selected', 'bip-pages'),
+    'option_none_value' => 0,
+    'name' => OPTION_NAME . "[instruction_id]",
+    'id' => OPTION_NAME . "[instruction_id]",
+    'selected' => \BipPages\get_bip_instruction_page(),
     'post_type' => 'bip'
   ];
   wp_dropdown_pages( $args );

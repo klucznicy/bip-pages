@@ -40,5 +40,5 @@
 </ul>
 
 <p>
-	<a href="<?= $bip_manual ?>"><?= _e( 'BIP pages usage manual', 'bip-pages') ?></a>
+	<a href="<?= $bip_instruction_url ?>"><?= _e( 'BIP pages usage manual', 'bip-pages') ?></a>
 </p>

@@ -81,7 +81,7 @@ function create_page( $title, $content = '' ) {
     // create page with bip post_type
     $page_args = array(
       'post_title'    => wp_strip_all_tags( $title ),
-      'post_content'  => '',
+      'post_content'  => $content,
       'post_status'   => 'publish',
       'post_author'   => get_current_user_id(),
       'post_type'     => 'bip',
@@ -207,10 +207,23 @@ function set_bip_main_page( $id ) {
   update_option( Settigs\OPTION_NAME, $option );
 }
 
+function get_bip_instruction_page() {
+  $options = get_option( 'bip-pages' );
+  return isset( $options['instruction_id'] ) ? $options['instruction_id'] : false;
+}
+
+function set_bip_instruction_page( $id ) {
+  $option = get_option( Settings\OPTION_NAME, array() );
+  $option['instruction_id'] = $id;
+  update_option( Settigs\OPTION_NAME, $option );
+}
+
 function add_basic_main_page_data( $content ) {
-  global $bip_main_page_content;
+  global $bip_main_page_content, $bip_instruction_url;
 
   $bip_main_page_content = $content;
+
+  $bip_instruction_url = get_permalink( get_bip_instruction_page() );
 
   $post = get_post();
   if ( $post->ID == get_bip_main_page() ) {

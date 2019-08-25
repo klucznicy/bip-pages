@@ -198,7 +198,7 @@ add_action( 'init', __NAMESPACE__ . '\register_bip_page_type' );
 /** main page **/
 function get_bip_main_page() {
   $options = get_option( 'bip-pages' );
-  return $options['id'];
+  return array_key_exists( 'id', $options ) ? $options['id'] : false;
 }
 
 function set_bip_main_page( $id ) {

@@ -27,7 +27,7 @@ function notice_success() {
     if (isset($_GET['settings-updated'])) {
   ?>
   <div class="notice notice-success is-dismissible">
-    <p><? esc_html_e( 'Settings saved successfully.', 'bip-pages' ); ?></p>
+    <p><?php esc_html_e( 'Settings saved successfully.', 'bip-pages' ); ?></p>
   </div>
   <?php
     }
@@ -42,7 +42,7 @@ function page_init() {
   register_setting(
     'bip-pages', // Option group
     OPTION_NAME, // Option name
-    'bip_pages_settings_sanitize' // Sanitize
+    __NAMESPACE__ . '\sanitize'
   );
 
   add_settings_section(
@@ -116,15 +116,27 @@ add_action( 'admin_init', __NAMESPACE__ . '\page_init' );
 * @param array $input Contains all settings fields as array keys
 */
 function sanitize( $input ) {
-  $new_input = array();
-  $options = array( /** @TODO **/ );
-  foreach ( $options as $opt ) {
-    if ( isset( $input[$opt] ) ) {
-      $new_input[$opt] = boardpress_sanitize_id( $input[$opt] );
+  foreach ( $input as $option => $value ) {
+    switch ( $option ) {
+      case 'id':
+      case 'instruction_id':
+        if ( is_numeric( $value ) && /* post exists? */ get_post_status( $value ) !== false ) {
+          $sanitized_input[$option] = $value;
+        } else {
+          // @TODO display error message here
+        }
+        break;
+      case 'email':
+        $sanitized_input['email'] = sanitize_email( $input['email'] );
+        break;
+      case 'phone':
+        // @TODO add sanitize function for phone number
+      default:
+        $sanitized_input[$option] = sanitize_text_field( $value );
     }
   }
 
-  return $new_input;
+  return $sanitized_input;
 }
 
 function main_page_id_callback() {

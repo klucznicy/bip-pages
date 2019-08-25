@@ -11,7 +11,7 @@ class BIP_Logo_Widget extends WP_Widget {
 
     public $args = array(
         'before_widget' => '<div class="widget-wrap">',
-        'after_widget'  => '</div></div>'
+        'after_widget'  => '</div>'
     );
 
     public function widget( $args, $instance ) {
@@ -21,7 +21,6 @@ class BIP_Logo_Widget extends WP_Widget {
 
         echo $args['before_widget'];
 
-        echo '<div class="textwidget">';
         echo "<a href='{$bip_main_page_url}'>";
 
         switch ($instance['image_type']) {
@@ -31,7 +30,6 @@ class BIP_Logo_Widget extends WP_Widget {
         }
 
         echo '</a>';
-        echo '</div>';
 
         echo $args['after_widget'];
     }

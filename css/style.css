@@ -24,3 +24,18 @@ article.type-bip .entry-title > a {
 .bip-address p {
   margin: 0;
 }
+
+/** widget styles **/
+.widget_bip-logo a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+
+.widget_bip-logo a:hover {
+  text-decoration: none;
+}
+
+.widget_bip-logo a img {
+  width: 80%;
+}

@@ -20,6 +20,21 @@ function create_admin_page() {
   include( "templates/bip-page-settings-template.php" );
 }
 
+function notice_success() {
+  $screen = get_current_screen();
+
+  if ( $screen->id === 'bip_page_bip-pages-admin' ) {
+    if (isset($_GET['settings-updated'])) {
+  ?>
+  <div class="notice notice-success is-dismissible">
+    <p><?= __( 'Settings saved successfully.', 'bip-pages' ); ?></p>
+  </div>
+  <?php
+    }
+  }
+}
+add_action( 'admin_notices', __NAMESPACE__ . '\notice_success' );
+
 /**
 * Register and add settings
 */
@@ -79,7 +94,7 @@ function page_init() {
 
   add_settings_field(
     'bip_pages_instruction_id',
-    __('Name of representative', 'bip-pages'),
+    __('Usage instruction page', 'bip-pages'),
     __NAMESPACE__ . '\instruction_page_callback',
     PAGE_NAME,
     'bip_pages_settings_main_page'

@@ -298,3 +298,36 @@ function change_bip_template( $single_template ) {
 
 	return $single_template;
 }
+
+function is_bip_main_page_edit_screen() {
+  return isset( $_GET['action'] ) &&
+      $_GET['action'] == 'edit' &&
+      isset( $_GET['post'] ) &&
+      $_GET['post'] == get_bip_main_page();
+}
+
+function main_page_edit_notice() {
+  if ( is_bip_main_page_edit_screen() ) {
+    $message = '<p>' . __( 'You are editing the BIP main page.', 'bip-pages' ) . '</p>' .
+      '<p>' . __( 'Parts of this page are automatically generated. The text you enter below will display beetween the automatic header and footer.', 'bip-pages' ) . '</p>';
+    echo "<div class='notice notice-info is-dismissible'>{$message}</div>";
+  }
+}
+add_action( 'admin_notices', __NAMESPACE__ . '\main_page_edit_notice' );
+
+function enqueue_editor_notices() {
+  if ( is_bip_main_page_edit_screen() ) {
+    wp_enqueue_script(
+          'bip-editor-notices',
+          plugin_dir_url( __FILE__ ) . '/js/editor_notices.js',
+          array( 'wp-notices', 'wp-i18n', 'wp-editor' )
+      );
+      $script_params = [
+        'currently_edited_post' => $_GET['post'],
+        'bip_main_page_id' => get_option( Settings\OPTION_NAME )['id']
+      ];
+      wp_localize_script( 'bip-editor-notices', 'scriptParams', $script_params );
+      wp_set_script_translations( 'bip-editor-notices', 'bip-pages' );
+    }
+}
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_notices' );

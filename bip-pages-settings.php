@@ -27,7 +27,7 @@ function notice_success() {
     if (isset($_GET['settings-updated'])) {
   ?>
   <div class="notice notice-success is-dismissible">
-    <p><?= __( 'Settings saved successfully.', 'bip-pages' ); ?></p>
+    <p><? esc_html_e( 'Settings saved successfully.', 'bip-pages' ); ?></p>
   </div>
   <?php
     }
@@ -134,7 +134,7 @@ function main_page_id_callback() {
 
 function instruction_page_callback() {
   $args = [
-    'show_option_none' => __('Not selected', 'bip-pages'),
+    'show_option_none' => esc_html__('Not selected', 'bip-pages'),
     'option_none_value' => 0,
     'name' => OPTION_NAME . "[instruction_id]",
     'id' => OPTION_NAME . "[instruction_id]",
@@ -145,19 +145,19 @@ function instruction_page_callback() {
 }
 
 function main_page_address_callback() {
-  build_input('address', 'text', __('The address of your organization', 'bip-pages'));
+  build_input('address', 'text', esc_html__('The address of your organization', 'bip-pages'));
 }
 
 function main_page_rep_callback() {
-  build_input('rep', 'text', __('Full name of a BIP editor', 'bip-pages'));
+  build_input('rep', 'text', esc_html__('Full name of a BIP editor', 'bip-pages'));
 }
 
 function main_page_email_callback() {
-  build_input('email', 'email', __('Email to a BIP editor', 'bip-pages'));
+  build_input('email', 'email', esc_html__('Email to a BIP editor', 'bip-pages'));
 }
 
 function main_page_phone_callback() {
-  build_input('phone', 'tel', __('Phone number to your organization', 'bip-pages'));
+  build_input('phone', 'tel', esc_html__('Phone number to your organization', 'bip-pages'));
 }
 
 function get_settings_url( Array $options = array() ) {

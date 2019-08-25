@@ -262,10 +262,10 @@ add_filter( 'display_post_states', __NAMESPACE__ . '\mark_bip_page_states', 10, 
 function mark_bip_page_states( $post_states, $post ) {
   switch ( $post->ID ) {
     case get_bip_main_page():
-      $post_states[] = __( 'BIP Main Page', 'bip-pages' );
+      $post_states[] = esc_html__( 'BIP Main Page', 'bip-pages' );
       break;
     case get_bip_instruction_page():
-      $post_states[] = __( 'BIP Instruction Page', 'bip-pages' );
+      $post_states[] = esc_html__( 'BIP Instruction Page', 'bip-pages' );
       break;
   }
 
@@ -308,8 +308,8 @@ function is_bip_main_page_edit_screen() {
 
 function main_page_edit_notice() {
   if ( is_bip_main_page_edit_screen() ) {
-    $message = '<p>' . __( 'You are editing the BIP main page.', 'bip-pages' ) . '</p>' .
-      '<p>' . __( 'Parts of this page are automatically generated. The text you enter below will be displayed between the automatic BIP header and footer.', 'bip-pages' ) . '</p>';
+    $message = '<p>' . esc_html__( 'You are editing the BIP main page.', 'bip-pages' ) . '</p>' .
+      '<p>' . esc_html__( 'Parts of this page are automatically generated. The text you enter below will be displayed between the automatic BIP header and footer.', 'bip-pages' ) . '</p>';
     echo "<div class='notice notice-info is-dismissible'>{$message}</div>";
   }
 }

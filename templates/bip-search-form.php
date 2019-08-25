@@ -1,6 +1,8 @@
 <form role="search" method="get" action="<?= esc_url( home_url( '/' ) ) ?>">
 	<label>
-  	<span class="screen-reader-text"><?= _x( 'Search for:', 'label' ) ?></span>
+  	<span class="screen-reader-text">
+			<?= esc_html_x( 'Search for:', 'label' ) ?>
+		</span>
 		<input type="search"
 			placeholder="<?= esc_attr_x( 'Search BIP pages&hellip;', 'placeholder' ) ?>"
 			value="<?= get_search_query() ?>" name="s" />

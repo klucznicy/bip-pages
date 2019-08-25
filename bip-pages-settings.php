@@ -11,12 +11,12 @@ function register_options_page() {
     __( 'BIP Pages Settings', 'bip-pages' ),
     'manage_options',
     PAGE_NAME,
-    __NAMESPACE__ . '\create_admin_page'
+    __NAMESPACE__ . '\render_admin_page'
   );
 }
 add_action( 'admin_menu', __NAMESPACE__ . '\register_options_page' );
 
-function create_admin_page() {
+function render_admin_page() {
   include( "templates/bip-page-settings-template.php" );
 }
 
@@ -92,12 +92,19 @@ function page_init() {
     'bip_pages_settings_main_page'
   );
 
+  add_settings_section(
+    'bip_pages_settings_instruction_page', // ID
+    __('BIP instruction page settings', 'bip-pages'), // Title
+    '', // Callback (for help text if needed)
+    'bip-pages-admin' // Page
+  );
+
   add_settings_field(
     'bip_pages_instruction_id',
     __('Usage instruction page', 'bip-pages'),
     __NAMESPACE__ . '\instruction_page_callback',
     PAGE_NAME,
-    'bip_pages_settings_main_page'
+    'bip_pages_settings_instruction_page'
   );
 
 }
@@ -122,7 +129,7 @@ function sanitize( $input ) {
 
 function main_page_id_callback() {
   $args = [
-    'show_option_none' => __('Not selected', 'bip-pages'),
+    'show_option_none' => esc_html__('Not selected', 'bip-pages'),
     'option_none_value' => 0,
     'name' => OPTION_NAME . "[id]",
     'id' => OPTION_NAME . "[id]",

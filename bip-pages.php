@@ -278,3 +278,17 @@ function add_footer( $content ) {
   return $content;
 }
 add_filter('the_content', __NAMESPACE__ . '\add_footer' );
+
+add_filter('single_template', __NAMESPACE__ . '\change_bip_template');
+function change_bip_template( $single_template ) {
+  global $post;
+
+	if ( 'bip' === $post->post_type ) {
+    $page_template = get_template_directory() . '/page.php';
+    if ( file_exists( $page_template ) ) {
+		  $single_template = $page_template;
+    }
+	}
+
+	return $single_template;
+}

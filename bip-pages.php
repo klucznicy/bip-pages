@@ -258,11 +258,17 @@ function add_post_class( $classes, $class = '', $post_id = '' ) {
 add_filter( 'post_class', __NAMESPACE__ . '\add_post_class' );
 
 /** auxiliary **/
-add_filter( 'display_post_states', __NAMESPACE__ . '\mark_bip_main_page', 10, 2 );
-function mark_bip_main_page( $post_states, $post ) {
-  if( $post->ID == get_bip_main_page() ) {
-  	$post_states[] = __( 'BIP Main Page', 'bip-pages' );
-	}
+add_filter( 'display_post_states', __NAMESPACE__ . '\mark_bip_page_states', 10, 2 );
+function mark_bip_page_states( $post_states, $post ) {
+  switch ( $post->ID ) {
+    case get_bip_main_page():
+      $post_states[] = __( 'BIP Main Page', 'bip-pages' );
+      break;
+    case get_bip_instruction_page():
+      $post_states[] = __( 'BIP Instruction Page', 'bip-pages' );
+      break;
+  }
+
 	return $post_states;
 }
 

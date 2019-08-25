@@ -16,7 +16,7 @@ function plugin_init() {
   load_plugin_textdomain(
     'bip-pages',
     false,
-    plugin_basename( __FILE__ ) . '/languages'
+    basename( dirname( __FILE__ ) ) . '/languages'
   );
 
   /** Include submodules **/

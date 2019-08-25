@@ -309,7 +309,7 @@ function is_bip_main_page_edit_screen() {
 function main_page_edit_notice() {
   if ( is_bip_main_page_edit_screen() ) {
     $message = '<p>' . __( 'You are editing the BIP main page.', 'bip-pages' ) . '</p>' .
-      '<p>' . __( 'Parts of this page are automatically generated. The text you enter below will display beetween the automatic header and footer.', 'bip-pages' ) . '</p>';
+      '<p>' . __( 'Parts of this page are automatically generated. The text you enter below will be displayed between the automatic BIP header and footer.', 'bip-pages' ) . '</p>';
     echo "<div class='notice notice-info is-dismissible'>{$message}</div>";
   }
 }

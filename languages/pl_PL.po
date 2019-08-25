@@ -1,0 +1,233 @@
+# Copyright (C) 2019 Łukasz Garczewski
+# This file is distributed under the same license as the BIP for WordPress plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: BIP for WordPress 1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bip-for-"
+"wordpress\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-08-25 19:24+0200\n"
+"PO-Revision-Date: 2019-08-25 19:35+0200\n"
+"X-Generator: Poedit 1.8.6\n"
+"X-Domain: bip-pages\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: pl\n"
+
+#. Plugin Name of the plugin
+msgid "BIP for WordPress"
+msgstr "BIP dla WordPressa"
+
+#. Description of the plugin
+msgid ""
+"A plugin adding BIP (Biuletyn Informacji Publicznej) functionality to "
+"WordPress"
+msgstr ""
+"Wtyczka dodająca funkcjonalność Biuletynu Informacji Publicznej do "
+"WordPressa"
+
+#. Author of the plugin
+msgid "Łukasz Garczewski"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://klucznicy.org.pl/open-source/"
+msgstr ""
+
+#: bip-logo-widget.php:20 bip-logo-widget.php:40
+msgid "BIP naszej organizacji"
+msgstr "BIP naszej organizacji"
+
+#: bip-pages-settings.php:10 bip-pages-settings.php:11
+#: templates/bip-page-settings-template.php:2
+msgid "BIP Pages Settings"
+msgstr "Ustawienia stron BIP"
+
+#: bip-pages-settings.php:30
+msgid "Settings saved successfully."
+msgstr "Ustawienia zostały zapisane."
+
+#: bip-pages-settings.php:50
+msgid "BIP Main Page settings"
+msgstr "Ustawienia strony głównej BIP"
+
+#: bip-pages-settings.php:57 bip-pages.php:104 bip-pages.php:265
+msgid "BIP Main Page"
+msgstr "Strona główna BIP"
+
+#: bip-pages-settings.php:65
+msgid "Organization Address"
+msgstr "Adres organizacji"
+
+#: bip-pages-settings.php:73
+msgid "E-Mail Address"
+msgstr "Adres e-mail"
+
+#: bip-pages-settings.php:81
+msgid "Phone Number"
+msgstr "Numer telefonu"
+
+#: bip-pages-settings.php:89
+msgid "Name of representative"
+msgstr "Dane redaktora BIP"
+
+#: bip-pages-settings.php:97
+msgid "Usage instruction page"
+msgstr "Strona z instrukcją obsługi"
+
+#: bip-pages-settings.php:125 bip-pages-settings.php:137
+msgid "Not selected"
+msgstr ""
+
+#: bip-pages-settings.php:148
+msgid "The address of your organization"
+msgstr "Adres twojej organizacji"
+
+#: bip-pages-settings.php:152
+msgid "Full name of a BIP editor"
+msgstr "Imię i nazwisko jednej z osób redagującej BIP"
+
+#: bip-pages-settings.php:156
+msgid "Email to a BIP editor"
+msgstr "Adres mailowy redaktora BIP"
+
+#: bip-pages-settings.php:160
+msgid "Phone number to your organization"
+msgstr "Numer telefonu do twojej organizacji"
+
+#: bip-pages.php:31
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: bip-pages.php:114
+msgid "BIP usage manual"
+msgstr "Instrukcja obsługi BIP"
+
+#: bip-pages.php:162
+msgctxt "Post type general name"
+msgid "BIP pages"
+msgstr "Strony BIP"
+
+#: bip-pages.php:163
+msgctxt "Post type singular name"
+msgid "BIP page"
+msgstr "Strona BIP"
+
+#: bip-pages.php:164
+msgctxt "Admin Menu text"
+msgid "BIP Pages"
+msgstr "Strony BIP"
+
+#: bip-pages.php:165
+msgctxt "Add New on Toolbar"
+msgid "BIP page"
+msgstr "Strona BIP"
+
+#: bip-pages.php:166
+msgid "Add New"
+msgstr "Dodaj nową"
+
+#: bip-pages.php:167
+msgid "Add New BIP page"
+msgstr "Dodaj nową stronę BIP"
+
+#: bip-pages.php:168
+msgid "New BIP page"
+msgstr "Nowa strona BIP"
+
+#: bip-pages.php:169
+msgid "Edit BIP page"
+msgstr "Edytuj stronę BIP"
+
+#: bip-pages.php:170
+msgid "View BIP page"
+msgstr "Wyświetl stronę BIP"
+
+#: bip-pages.php:171
+msgid "All BIP pages"
+msgstr "Wszystkie strony BIP"
+
+#: bip-pages.php:172
+msgid "Search BIP pages"
+msgstr "Szukaj na stronach BIP"
+
+#: bip-pages.php:173
+msgid "Parent BIP pages:"
+msgstr "Nadrzędne strony BIP:"
+
+#: bip-pages.php:174
+msgid "No BIP pages found."
+msgstr "Nie znaleziono stron BIP."
+
+#: bip-pages.php:175
+msgid "No BIP pages found in Trash."
+msgstr "Nie znaleziono stron BIP w Koszu."
+
+#: bip-pages.php:268
+msgid "BIP Instruction Page"
+msgstr "Instrukcja obsługi BIP"
+
+#: bip-pages.php:311 js/editor_notices.js:2
+msgid "You are editing the BIP main page."
+msgstr "Edytujesz stronę główną BIP."
+
+#: templates/bip-main-template.php:4
+msgid "Biuletyn Informacji Publicznej"
+msgstr "Biuletyn Informacji Publicznej"
+
+#: templates/bip-main-template.php:8
+msgid "Biuletyn Informacji Publicznej organizacji %s"
+msgstr "Biuletyn Informacji Publicznej organizacji %s"
+
+#: templates/bip-main-template.php:14
+msgid "Address:"
+msgstr "Adres:"
+
+#: templates/bip-main-template.php:15
+msgid "Editor:"
+msgstr "Redaktor:"
+
+#: templates/bip-main-template.php:18
+msgid "E-mail address:"
+msgstr "Adres mailowy:"
+
+#: templates/bip-main-template.php:21
+msgid "Phone number:"
+msgstr "Numer telefonu:"
+
+#: templates/bip-main-template.php:32
+msgid "Recently updated BIP pages"
+msgstr "Ostatnio zmienione lub dodane strony BIP"
+
+#: templates/bip-main-template.php:43
+msgid "BIP pages usage manual"
+msgstr "Instrukcja obsługi stron BIP"
+
+#: templates/bip-page-footer-template.php:4
+msgid "Information prepared by: %s"
+msgstr "Informacja przygotowana przez:"
+
+#: templates/bip-page-footer-template.php:7
+msgid "Published by: %s"
+msgstr "Opublikował(a):"
+
+#: templates/bip-page-footer-template.php:11
+msgid "Page created: <time>%s at %s</time>"
+msgstr "Stronę utworzono: <time>%s o %s</time>"
+
+#: templates/bip-page-footer-template.php:17
+msgid "Last updated: <time>%s at %s</time>"
+msgstr "Ostatnia zmiana: <time>%s o %s</time>"
+
+#: js/editor_notices.js:3
+msgid ""
+"Parts of this page are automatically generated. The text you enter below "
+"will be displayed beetween the automatic BIP header and footer."
+msgstr ""
+"Część tej strony jest generowana automatycznie. Tekst, który wpiszesz "
+"poniżej, zostanie wyświetlony pomiędzy automatycznie generowanym "
+"nagłówkiem a stopką."

@@ -130,6 +130,16 @@ function main_page_id_callback() {
     'post_type' => 'bip'
   ];
   wp_dropdown_pages( $args );
+
+  if ( !empty( \BipPages\get_bip_main_page() ) ) {
+    edit_post_link(
+      __('Edit BIP main page', 'bip-pages' ),
+      '',
+      '',
+      \BipPages\get_bip_main_page(),
+      'button button-secondary'
+    );
+  }
 }
 
 function instruction_page_callback() {
@@ -142,6 +152,16 @@ function instruction_page_callback() {
     'post_type' => 'bip'
   ];
   wp_dropdown_pages( $args );
+
+  if ( !empty( \BipPages\get_bip_instruction_page() ) ) {
+    edit_post_link(
+      __('Edit BIP instruction page', 'bip-pages' ),
+      '',
+      '',
+      \BipPages\get_bip_instruction_page(),
+      'button button-secondary'
+    );
+  }
 }
 
 function main_page_address_callback() {

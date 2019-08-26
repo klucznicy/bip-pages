@@ -20,19 +20,15 @@ function plugin_init() {
   );
 
   /** Include submodules **/
+  include( 'bip-pages-activation.php' );
+  include( 'bip-pages-main-page.php ');
   include( 'bip-pages-settings.php' );
+  include( 'bip-pages-styling.php ');
   include( 'bip-logo-widget.php' );
+
+  add_action('wp_enqueue_scripts', __NAMESPACE__ . '\register_css');
 }
 
-/** add settings link to plugins **/
-add_filter('plugin_action_links_' . plugin_basename(__FILE__), __NAMESPACE__ . '\action_links', 10, 2);
-function action_links( $links, $plugin_file ) {
-  $settings_url = Settings\get_settings_url();
-  $links[] = "<a href='{$settings_url}'>" . __( 'Settings', 'bip-pages' ) . "</a>";
-  return $links;
-}
-
-add_action('wp_enqueue_scripts', __NAMESPACE__ . '\register_css');
 function register_css() {
   wp_enqueue_style( 'bip-pages', plugin_dir_url( __FILE__ ) . 'css/style.css' );
 }
@@ -75,87 +71,6 @@ function deactivate() {
   }
 }
 
-function create_page( $title, $content = '' ) {
-  $page_id = post_exists( $title );
-  if ( empty( $page_id ) ) {
-    // create page with bip post_type
-    $page_args = array(
-      'post_title'    => wp_strip_all_tags( $title ),
-      'post_content'  => $content,
-      'post_status'   => 'publish',
-      'post_author'   => get_current_user_id(),
-      'post_type'     => 'bip',
-    );
-
-    $page_id = wp_insert_post( $page_args, true );
-  } else {
-    $page_args = array(
-      'ID' => $page_id,
-      'post_type' => 'bip'
-    );
-
-    $page_id = wp_update_post( $page_args, true );
-  }
-
-  return $page_id;
-}
-
-function create_main_page() {
-  $title = __( 'BIP Main Page', 'bip-pages' );
-
-  $main_page_id = create_page( $title );
-
-  if ( !is_wp_error( $main_page_id ) ) {
-    set_bip_main_page( $main_page_id );
-  }
-}
-
-function create_instructions_page() {
-  $title = __( 'BIP usage manual', 'bip-pages' );
-
-  // Polish only for now
-  $instructions = file_get_contents( 'bip-usage-manual-pl.txt' );
-
-  $instruction_page_id = create_page( $title, $instructions );
-
-  if ( !is_wp_error( $instruction_page_id ) ) {
-    $option = get_option( Settings\OPTION_NAME, array() );
-    $option['instruction_id'] = $instruction_page_id;
-    update_option( Settings\OPTION_NAME, $option );
-  }
-}
-
-function add_logo_widget() {
-  if ( !empty( get_option( 'widget_bip-logo' ) ) ) {
-    $widget_options = array(
-      1 => array( 'image_type' => 1 ),
-    );
-
-    update_option( 'widget_bip-logo', $widget_options );
-  }
-
-  $active_widgets = get_option( 'sidebars_widgets' );
-
-  $first_sidebar = array_slice( $active_widgets, 1, 1 );
-
-  array_unshift( $first_sidebar, 'bip-logo-1' );
-
-  $updated_widgets = array_merge( $active_widgets, $first_sidebar );
-
-  update_option( 'sidebars_widgets', $updated_widgets );
-}
-
-add_action('admin_init', __NAMESPACE__ . '\post_activation_flow');
-function post_activation_flow() {
-    if( !is_admin() || get_option('Activated_Plugin') != 'bip-pages' ) {
-      return;
-    }
-
-    flush_rewrite_rules(); // we're adding a new page type slug
-    delete_option('Activated_Plugin');
-    wp_redirect( Settings\get_settings_url( ['plugin-activated' => 1] ) );
-}
-
 /** BIP page type registration **/
 function register_bip_page_type() {
     $labels = array(
@@ -195,82 +110,19 @@ function register_bip_page_type() {
 }
 add_action( 'init', __NAMESPACE__ . '\register_bip_page_type' );
 
-/** main page **/
-function get_bip_main_page() {
-  $options = get_option( 'bip-pages' );
-  return array_key_exists( 'id', $options ) ? $options['id'] : false;
-}
+function change_bip_template( $single_template ) {
+  global $post;
 
-function set_bip_main_page( $id ) {
-  $option = get_option( Settings\OPTION_NAME, array() );
-  $option['id'] = $id;
-  update_option( Settigs\OPTION_NAME, $option );
-}
-
-function get_bip_instruction_page() {
-  $options = get_option( 'bip-pages' );
-  return isset( $options['instruction_id'] ) ? $options['instruction_id'] : false;
-}
-
-function set_bip_instruction_page( $id ) {
-  $option = get_option( Settings\OPTION_NAME, array() );
-  $option['instruction_id'] = $id;
-  update_option( Settigs\OPTION_NAME, $option );
-}
-
-function add_basic_main_page_data( $content ) {
-  global $bip_main_page_content, $bip_instruction_url;
-
-  $bip_main_page_content = $content;
-
-  $bip_instruction_url = get_permalink( get_bip_instruction_page() );
-
-  $post = get_post();
-  if ( $post->ID == get_bip_main_page() ) {
-    ob_start();
-    require( __DIR__ . '/templates/bip-main-template.php' );
-    $content = ob_get_clean();
-  }
-
-  return $content;
-}
-add_filter('the_content', __NAMESPACE__ . '\add_basic_main_page_data' );
-
-/** display and styling **/
-function add_title_container( $title, $id = null ) {
-    $post = get_post( $id );
-    if ( is_singular( 'bip' ) || ( is_search() && $post->post_type == 'bip' ) ) {
-        $title = "<span class='bip-title-container'>" . $title . "</span>";
+	if ( 'bip' === $post->post_type ) {
+    $page_template = get_template_directory() . '/page.php';
+    if ( file_exists( $page_template ) ) {
+		  $single_template = $page_template;
     }
+	}
 
-    return $title;
+	return $single_template;
 }
-add_filter( 'the_title', __NAMESPACE__ . '\add_title_container', 10, 2 );
-
-function add_post_class( $classes, $class = '', $post_id = '' ) {
-  $post = get_post();
-  if ( $post->post_type == 'bip' ) {
-    $classes[] = 'type-page';
-  }
-
-  return $classes;
-}
-add_filter( 'post_class', __NAMESPACE__ . '\add_post_class' );
-
-/** auxiliary **/
-add_filter( 'display_post_states', __NAMESPACE__ . '\mark_bip_page_states', 10, 2 );
-function mark_bip_page_states( $post_states, $post ) {
-  switch ( $post->ID ) {
-    case get_bip_main_page():
-      $post_states[] = esc_html__( 'BIP Main Page', 'bip-pages' );
-      break;
-    case get_bip_instruction_page():
-      $post_states[] = esc_html__( 'BIP Instruction Page', 'bip-pages' );
-      break;
-  }
-
-	return $post_states;
-}
+add_filter('single_template', __NAMESPACE__ . '\change_bip_template');
 
 function add_footer( $content ) {
   $post = get_post();
@@ -285,49 +137,26 @@ function add_footer( $content ) {
 }
 add_filter('the_content', __NAMESPACE__ . '\add_footer' );
 
-add_filter('single_template', __NAMESPACE__ . '\change_bip_template');
-function change_bip_template( $single_template ) {
-  global $post;
-
-	if ( 'bip' === $post->post_type ) {
-    $page_template = get_template_directory() . '/page.php';
-    if ( file_exists( $page_template ) ) {
-		  $single_template = $page_template;
-    }
-	}
-
-	return $single_template;
+/** main page **/
+function get_bip_main_page() {
+  $options = get_option( 'bip-pages' );
+  return array_key_exists( 'id', $options ) ? $options['id'] : false;
 }
 
-function is_bip_main_page_edit_screen() {
-  return isset( $_GET['action'] ) &&
-      $_GET['action'] == 'edit' &&
-      isset( $_GET['post'] ) &&
-      $_GET['post'] == get_bip_main_page();
+function set_bip_main_page( $id ) {
+  $option = get_option( Settings\OPTION_NAME, array() );
+  $option['id'] = $id;
+  update_option( Settigs\OPTION_NAME, $option );
 }
 
-function main_page_edit_notice() {
-  if ( is_bip_main_page_edit_screen() ) {
-    $message = '<p>' . esc_html__( 'You are editing the BIP main page.', 'bip-pages' ) . '</p>' .
-      '<p>' . esc_html__( 'Parts of this page are automatically generated. The text you enter below will be displayed between the automatic BIP header and footer.', 'bip-pages' ) . '</p>';
-    echo "<div class='notice notice-info is-dismissible'>{$message}</div>";
-  }
+/** instruction page **/
+function get_bip_instruction_page() {
+  $options = get_option( 'bip-pages' );
+  return isset( $options['instruction_id'] ) ? $options['instruction_id'] : false;
 }
-add_action( 'admin_notices', __NAMESPACE__ . '\main_page_edit_notice' );
 
-function enqueue_editor_notices() {
-  if ( is_bip_main_page_edit_screen() ) {
-    wp_enqueue_script(
-          'bip-editor-notices',
-          plugin_dir_url( __FILE__ ) . '/js/editor_notices.js',
-          array( 'wp-notices', 'wp-i18n', 'wp-editor' )
-      );
-      $script_params = [
-        'currently_edited_post' => $_GET['post'],
-        'bip_main_page_id' => get_option( Settings\OPTION_NAME )['id']
-      ];
-      wp_localize_script( 'bip-editor-notices', 'scriptParams', $script_params );
-      wp_set_script_translations( 'bip-editor-notices', 'bip-pages' );
-    }
+function set_bip_instruction_page( $id ) {
+  $option = get_option( Settings\OPTION_NAME, array() );
+  $option['instruction_id'] = $id;
+  update_option( Settigs\OPTION_NAME, $option );
 }
-add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_notices' );

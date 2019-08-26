@@ -199,6 +199,15 @@ function main_page_phone_callback() {
   build_input('phone', 'tel', esc_html__('Phone number to your organization', 'bip-pages'));
 }
 
+/** add settings link to plugins **/
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), __NAMESPACE__ . '\action_links', 10, 2);
+function action_links( $links, $plugin_file ) {
+  $settings_url = get_settings_url();
+  $links[] = "<a href='{$settings_url}'>" . __( 'Settings', 'bip-pages' ) . "</a>";
+  return $links;
+}
+
+/** auxiliary functions **/
 function get_settings_url( Array $options = array() ) {
   $query = http_build_query(
     array_merge( ['post_type' => 'bip', 'page' => PAGE_NAME], $options )
@@ -207,7 +216,6 @@ function get_settings_url( Array $options = array() ) {
   return admin_url( 'edit.php?' . $query );
 }
 
-/** auxiliary functions **/
 function build_input( $id, $type = 'text', $placeholder = '', $pattern = false ) {
   $option = OPTION_NAME;
   $values = get_option( $option );

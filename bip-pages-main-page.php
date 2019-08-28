@@ -2,29 +2,21 @@
 namespace BipPages;
 
 function add_basic_main_page_data( $content ) {
-  global $bip_main_page_content, $bip_instruction_url;
-
-  $bip_main_page_content = $content;
-
-  $bip_instruction_url = get_permalink( get_bip_instruction_page() );
-
   $post = get_post();
   if ( $post->ID == get_bip_main_page() ) {
+    $options = get_option( Settings\OPTION_NAME );
+    $bip_main_page_content = $content;
+    $bip_logo_url = plugin_dir_url( __FILE__ ) . 'assets/bip-logos/bip-color-pl_min.png';
+    $bip_instruction_url = get_permalink( get_bip_instruction_page() );
+
     ob_start();
-    require( __DIR__ . '/templates/bip-main-template.php' );
+    include( __DIR__ . '/templates/bip-main-template.php' );
     $content = ob_get_clean();
   }
 
   return $content;
 }
 add_filter('the_content', __NAMESPACE__ . '\add_basic_main_page_data' );
-
-function is_bip_main_page_edit_screen() {
-  return isset( $_GET['action'] ) &&
-      $_GET['action'] == 'edit' &&
-      isset( $_GET['post'] ) &&
-      $_GET['post'] == get_bip_main_page();
-}
 
 function main_page_edit_notice() {
   if ( is_bip_main_page_edit_screen() ) {
@@ -51,3 +43,10 @@ function enqueue_editor_notices() {
     }
 }
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_notices' );
+
+function is_bip_main_page_edit_screen() {
+  return isset( $_GET['action'] ) &&
+      $_GET['action'] == 'edit' &&
+      isset( $_GET['post'] ) &&
+      $_GET['post'] == get_bip_main_page();
+}

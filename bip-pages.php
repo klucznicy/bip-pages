@@ -1,17 +1,26 @@
 <?php
 namespace BipPages;
 /**
+ * BIP for Wordpress
+ *
+ * @package     bip-for-wordpress
+ * @author      Łukasz Garczewski
+ * @copyright   2019 Łukasz Garczewski
+ * @license     GPL-3.0-or-later
+ *
+ * @wordpress-plugin
  * Plugin Name: BIP for WordPress
+ * Plugin URI: https://klucznicy.org.pl/open-source/bip-for-wordpress/
  * Description: A plugin adding BIP (Biuletyn Informacji Publicznej) functionality to WordPress
- * Version: 1.0
+ * Version: 1.0.0
  * Author: Łukasz Garczewski
- * Author URI: http://klucznicy.org.pl/open-source/
+ * Author URI: https://klucznicy.org.pl/open-source/
  * Text Domain: bip-pages
  * Domain Path: /languages
+ * License: GPL v3 or later
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
-/** Basic Plugin Config **/
-add_action('plugins_loaded', __NAMESPACE__ . '\plugin_init');
 function plugin_init() {
   load_plugin_textdomain(
     'bip-pages',
@@ -21,54 +30,20 @@ function plugin_init() {
 
   /** Include submodules **/
   include( 'bip-pages-activation.php' );
-  include( 'bip-pages-main-page.php ');
+  include( 'bip-pages-main-page.php' );
   include( 'bip-pages-settings.php' );
-  include( 'bip-pages-styling.php ');
+  include( 'bip-pages-styling.php' );
   include( 'bip-logo-widget.php' );
 
   add_action('wp_enqueue_scripts', __NAMESPACE__ . '\register_css');
 }
+add_action('plugins_loaded', __NAMESPACE__ . '\plugin_init');
+
+register_activation_hook( __FILE__, __NAMESPACE__ . '\activate' );
+register_deactivation_hook( __FILE__, __NAMESPACE__ . '\deactivate' );
 
 function register_css() {
   wp_enqueue_style( 'bip-pages', plugin_dir_url( __FILE__ ) . 'css/style.css' );
-}
-
-/** BIP Page activation flow **/
-register_activation_hook( __FILE__, __NAMESPACE__ . '\activate' );
-function activate() {
-  add_option('Activated_Plugin','bip-pages');
-  create_main_page();
-  create_instructions_page();
-  add_logo_widget();
-}
-
-register_deactivation_hook( __FILE__, __NAMESPACE__ . '\deactivate' );
-function deactivate() {
-  // remove widget data
-  delete_option( 'widget_bip-logo' );
-  $active_widgets = get_option( 'sidebars_widgets' );
-
-  foreach ( $active_widgets as $key => $val ) {
-    if ( empty( $val ) || !is_array( $val ) ) {
-      continue;
-    }
-
-    $widget_ids = array_flip( $val );
-
-    foreach ( $widget_ids as $widget => $id ) {
-      if ( strpos( $widget, 'bip-logo-' ) === 0 ) {
-        unset( $active_widgets[$key][$id] );
-      }
-    }
-  }
-
-  update_option( 'sidebars_widgets', $active_widgets );
-
-  // turn all bip pages to regular pages
-  $bip_pages = get_pages( ['post_type' => 'bip'] );
-  foreach ( $bip_pages as $id ) {
-    wp_update_post( $id, ['post_type' => 'page' ] );
-  }
 }
 
 /** BIP page type registration **/
@@ -111,9 +86,9 @@ function register_bip_page_type() {
 add_action( 'init', __NAMESPACE__ . '\register_bip_page_type' );
 
 function change_bip_template( $single_template ) {
-  global $post;
+  $post = get_post();
 
-	if ( 'bip' === $post->post_type ) {
+	if ( 'bip' == $post->post_type ) {
     $page_template = get_template_directory() . '/page.php';
     if ( file_exists( $page_template ) ) {
 		  $single_template = $page_template;
@@ -139,24 +114,18 @@ add_filter('the_content', __NAMESPACE__ . '\add_footer' );
 
 /** main page **/
 function get_bip_main_page() {
-  $options = get_option( 'bip-pages' );
-  return array_key_exists( 'id', $options ) ? $options['id'] : false;
+  return Settings\get_option_value( 'id' );
 }
 
 function set_bip_main_page( $id ) {
-  $option = get_option( Settings\OPTION_NAME, array() );
-  $option['id'] = $id;
-  update_option( Settigs\OPTION_NAME, $option );
+  return Settings\set_option_value( 'id', $id );
 }
 
 /** instruction page **/
 function get_bip_instruction_page() {
-  $options = get_option( 'bip-pages' );
-  return isset( $options['instruction_id'] ) ? $options['instruction_id'] : false;
+  return Settings\get_option_value( 'instruction_id' );
 }
 
 function set_bip_instruction_page( $id ) {
-  $option = get_option( Settings\OPTION_NAME, array() );
-  $option['instruction_id'] = $id;
-  update_option( Settigs\OPTION_NAME, $option );
+  return Settings\set_option_value( 'instruction_id', $id );
 }

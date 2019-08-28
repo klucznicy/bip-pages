@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-08-25 19:24+0200\n"
-"PO-Revision-Date: 2019-08-25 19:35+0200\n"
+"PO-Revision-Date: 2019-08-26 04:29+0200\n"
 "X-Generator: Poedit 1.8.6\n"
 "X-Domain: bip-pages\n"
 "Last-Translator: \n"
@@ -209,11 +209,11 @@ msgstr "Instrukcja obsługi stron BIP"
 
 #: templates/bip-page-footer-template.php:4
 msgid "Information prepared by: %s"
-msgstr "Informacja przygotowana przez:"
+msgstr "Informacja przygotowana przez: %s"
 
 #: templates/bip-page-footer-template.php:7
 msgid "Published by: %s"
-msgstr "Opublikował(a):"
+msgstr "Opublikował(a): %s"
 
 #: templates/bip-page-footer-template.php:11
 msgid "Page created: <time>%s at %s</time>"

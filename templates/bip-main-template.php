@@ -1,5 +1,4 @@
-<?php $options = get_option( BipPages\Settings\OPTION_NAME ); ?>
-<img src="<?= plugin_dir_url( __FILE__ ) ?>../assets/bip-logos/bip-color-pl_min.png"
+<img src="<?= $bip_logo_url ?>"
 	class="bip-main-logo"
 	alt="<?= esc_attr__( 'Biuletyn Informacji Publicznej', 'bip-pages' ) ?>"
 />
@@ -36,7 +35,7 @@
 </address>
 
 <div>
-<?php require( 'bip-search-form.php' ); ?>
+<?php include( 'bip-search-form.php' ); ?>
 </div>
 
 <?= $bip_main_page_content ?>

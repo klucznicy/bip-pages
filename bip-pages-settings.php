@@ -192,15 +192,23 @@ function main_page_rep_callback() {
 }
 
 function main_page_email_callback() {
-  build_input('email', 'email', esc_html__('Email to a BIP editor', 'bip-pages'));
+  build_input('email',
+    'email',
+    esc_html__('Email to a BIP editor', 'bip-pages')
+  );
 }
 
 function main_page_phone_callback() {
-  build_input('phone', 'tel', esc_html__('Phone number to your organization', 'bip-pages'));
+  build_input(
+    'phone',
+    'tel',
+    esc_html__('Phone number to your organization', 'bip-pages'),
+    '[0-9 +]+'
+  );
 }
 
 /** add settings link to plugins **/
-add_filter('plugin_action_links_' . plugin_basename(__FILE__), __NAMESPACE__ . '\action_links', 10, 2);
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), __NAMESPACE__ . '\action_links' );
 function action_links( $links, $plugin_file ) {
   $settings_url = get_settings_url();
   $links[] = "<a href='{$settings_url}'>" . __( 'Settings', 'bip-pages' ) . "</a>";
@@ -224,8 +232,19 @@ function build_input( $id, $type = 'text', $placeholder = '', $pattern = false )
   $element = "<input type='{$type}' value='%s'
                id='{$option}[{$id_safe}]' name='{$option}[{$id_safe}]'
                placeholder='{$placeholder}' ";
-  $element .= $pattern ? "pattern='${pattern}'" : '';
+  $element .= $pattern ? "pattern='{$pattern}'" : '';
   $element .= "/>";
 
   printf( $element, !empty( $values[$id] ) ? $values[$id] : '' );
+}
+
+function get_option_value( $opt ) {
+  $options = get_option( OPTION_NAME );
+  return isset( $options[$opt] ) ? $options[$opt] : false;
+}
+
+function set_option_value( $opt, $value ) {
+  $option = get_option( OPTION_NAME, array() );
+  $option[$opt] = $value;
+  return update_option( OPTION_NAME, $option );
 }

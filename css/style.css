@@ -22,6 +22,10 @@ article.type-bip .entry-title > a {
   float: right;
 }
 
+.bip-search {
+  margin: 1em 0;
+}
+
 .bip-address {
   margin: 1em 0;
   font-style: normal;

@@ -102,7 +102,7 @@ add_filter('single_template', __NAMESPACE__ . '\change_bip_template');
 function add_footer( $content ) {
   $post = get_post();
 
-  if ( $post->post_type == 'bip' && is_single() ) {
+  if ( is_single() && $post->post_type == 'bip' && $post->ID != get_bip_main_page() ) {
     ob_start();
     include( __DIR__ . '/templates/bip-page-footer-template.php' );
     $content .= ob_get_clean();

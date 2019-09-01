@@ -34,7 +34,7 @@
 	</p>
 </address>
 
-<div>
+<div class="bip-search">
 <?php include( 'bip-search-form.php' ); ?>
 </div>
 
@@ -55,3 +55,5 @@
 		<?= esc_html__( 'BIP pages usage manual', 'bip-pages') ?>
 	</a>
 </p>
+
+<?php include( __DIR__ . '/bip-page-footer-template.php' ); ?>

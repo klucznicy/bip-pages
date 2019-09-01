@@ -83,6 +83,27 @@ function post_activation_flow() {
     delete_option('Activated_Plugin');
     wp_redirect( Settings\get_settings_url( ['plugin-activated' => 1] ) );
 
-    // @TODO add info post-activation
+    set_transient( 'bip-pages-activation-msg', true, 5 );
   }
+}
+
+add_action( 'admin_notices', __NAMESPACE__ . '\activation_notice' );
+
+function activation_notice(){
+    if( get_transient( 'bip-pages-activation-msg' ) ){
+        ?>
+        <div class="updated notice is-dismissible">
+            <p>
+              <?= esc_html__( 'BIP Pages plugin has been activated. Use the settings page below to configure your main page.', 'bip-pages' ) ?>
+            </p>
+        </div>
+        <div class="updated notice is-dismissible">
+            <p>
+              <?= esc_html__( 'BIP Pages: your main page and BIP instructions page have been created automatically.', 'bip-pages' ) ?>
+            </p>
+        </div>
+        <?php
+
+        delete_transient( 'fx-admin-notice-example' );
+    }
 }

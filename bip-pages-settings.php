@@ -126,6 +126,9 @@ function sanitize( $input ) {
           // @TODO display error message here
         }
         break;
+      case 'address':
+        $sanitized_input['address'] = sanitize_textarea_field( $input['address'] );
+        break;
       case 'email':
         $sanitized_input['email'] = sanitize_email( $input['email'] );
         break;
@@ -196,17 +199,17 @@ function main_page_address_callback() {
   $element .= '%s';
   $element .= '</textarea>';
 
-  printf( $element, !empty( $values[$id] ) ? $values[$id] : '' );
+  printf( $element, !empty( $values[$id] ) ? esc_textarea( $values[$id] ) : '' );
 }
 
 function main_page_rep_callback() {
-  build_input('rep', 'text', esc_html__('Full name of a BIP editor', 'bip-pages'));
+  build_input('rep', 'text', esc_attr__('Full name of a BIP editor', 'bip-pages'));
 }
 
 function main_page_email_callback() {
   build_input('email',
     'email',
-    esc_html__('Email to a BIP editor', 'bip-pages')
+    esc_attr__('Email to a BIP editor', 'bip-pages')
   );
 }
 
@@ -214,7 +217,7 @@ function main_page_phone_callback() {
   build_input(
     'phone',
     'tel',
-    esc_html__('Phone number to your organization', 'bip-pages'),
+    esc_attr__('Phone number to your organization', 'bip-pages'),
     '[0-9 +]+'
   );
 }

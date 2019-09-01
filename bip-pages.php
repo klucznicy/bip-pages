@@ -28,12 +28,7 @@ function plugin_init() {
     basename( dirname( __FILE__ ) ) . '/languages'
   );
 
-  /** Include submodules **/
-  include( 'bip-pages-activation.php' );
-  include( 'bip-pages-main-page.php' );
-  include( 'bip-pages-settings.php' );
-  include( 'bip-pages-styling.php' );
-  include( 'bip-logo-widget.php' );
+  include_submodules();
 
   add_action('wp_enqueue_scripts', __NAMESPACE__ . '\register_css');
 }
@@ -41,6 +36,53 @@ add_action('plugins_loaded', __NAMESPACE__ . '\plugin_init');
 
 register_activation_hook( __FILE__, __NAMESPACE__ . '\activate' );
 register_deactivation_hook( __FILE__, __NAMESPACE__ . '\deactivate' );
+
+function include_submodules() {
+  include( 'bip-pages-activation.php' );
+  include( 'bip-pages-main-page.php' );
+  include( 'bip-pages-settings.php' );
+  include( 'bip-pages-styling.php' );
+  include( 'bip-logo-widget.php' );
+}
+
+function activate() {
+ add_option('Activated_Plugin','bip-pages'); // deleted later in post_activation_flow
+
+ include_submodules();
+
+ create_main_page();
+ create_instructions_page();
+ add_logo_widget();
+}
+
+function deactivate() {
+  // remove widget data
+  delete_option( 'widget_bip-logo' );
+  $active_widgets = get_option( 'sidebars_widgets' );
+
+  foreach ( $active_widgets as $key => $val ) {
+    if ( empty( $val ) || !is_array( $val ) ) {
+      continue;
+    }
+
+    $widget_ids = array_flip( $val );
+
+    foreach ( $widget_ids as $widget => $id ) {
+      if ( strpos( $widget, 'bip-logo-' ) === 0 ) {
+        unset( $active_widgets[$key][$id] );
+      }
+    }
+  }
+
+  update_option( 'sidebars_widgets', $active_widgets );
+
+  // turn all bip pages to regular pages
+  $bip_pages = get_pages( ['post_type' => 'bip'] );
+  foreach ( $bip_pages as $page ) {
+    $page->post_type = 'page';
+    wp_update_post( $page );
+  }
+}
 
 function register_css() {
   wp_enqueue_style( 'bip-pages', plugin_dir_url( __FILE__ ) . 'css/style.css' );

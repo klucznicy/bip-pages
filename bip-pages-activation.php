@@ -47,7 +47,7 @@ function create_instructions_page() {
   $title = __( 'BIP usage manual', 'bip-pages' );
 
   // Polish only for now
-  $instructions = file_get_contents( 'bip-usage-manual-pl.txt' );
+  $instructions = file_get_contents( __DIR__ . '/boilerplate-text/bip-usage-manual-pl.txt' );
 
   $instruction_page_id = create_page( $title, $instructions );
 

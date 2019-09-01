@@ -25,6 +25,7 @@ function notice_success() {
 
   if ( $screen->id === 'bip_page_bip-pages-admin' ) {
     if (isset($_GET['settings-updated'])) {
+      // @TODO check for errors
   ?>
   <div class="notice notice-success is-dismissible">
     <p><?php esc_html_e( 'Settings saved successfully.', 'bip-pages' ); ?></p>
@@ -123,7 +124,7 @@ function sanitize( $input ) {
         if ( is_numeric( $value ) && /* post exists? */ get_post_status( $value ) !== false ) {
           $sanitized_input[$option] = $value;
         } else {
-          add_settings_error( OPTION_NAME, $option, esc_html__('test', 'bip-pages') );
+          add_settings_error( OPTION_NAME, $option, esc_html__('Invalid page ID given for ' . $option, 'bip-pages') );
         }
         break;
       case 'address':

@@ -184,7 +184,19 @@ function instruction_page_callback() {
 }
 
 function main_page_address_callback() {
-  build_input('address', 'text', esc_html__('The address of your organization', 'bip-pages'));
+  $id = 'address';
+  $option = OPTION_NAME;
+  $values = get_option( $option );
+  $id_safe = esc_attr( $id );
+  $placeholder = esc_attr__( 'The address of your organization', 'bip-pages' );
+
+  $element = "<textarea
+               id='{$option}[{$id_safe}]' name='{$option}[{$id_safe}]'
+               placeholder='{$placeholder}' >";
+  $element .= '%s';
+  $element .= '</textarea>';
+
+  printf( $element, !empty( $values[$id] ) ? $values[$id] : '' );
 }
 
 function main_page_rep_callback() {

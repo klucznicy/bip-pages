@@ -2,7 +2,7 @@
 
 A Wordpress plugin for easy creation of Polish public information bulletin (Biuletyn Informacji Publicznej, or BIP) websites by NGOs and institutions.
 
-The plugin adds a new type of page to your Wordpress installagtion, called a "BIP page". 
+The plugin adds a new type of page to your Wordpress installagtion, called a "BIP page".
 
 In accordance with the Polish public information access act ([ustawa o dostępie do informacji publicznej](http://prawo.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20011121198)), each BIP page displayes the following information in its footer:
 * the date of its creation,
@@ -10,6 +10,10 @@ In accordance with the Polish public information access act ([ustawa o dostępie
 * its author.
 
 Additionally, the extension automatically creates a rudimentary editable main page for your BIP (containing all the information required by law), as well as a page with basic usage instructions (also required by law).
+
+# Installation
+
+Download this repository into your Wordpress installation's `wp-content/plugins/` directory and activate the plugin in your admin panel.
 
 # Copyright
 

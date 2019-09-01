@@ -26,6 +26,12 @@ article.type-bip .entry-title > a {
   margin: 1em 0;
 }
 
+.bip-search form label {
+  width: 80%;
+  float: left;
+  margin-right: 0.5em;
+}
+
 .bip-address {
   margin: 1em 0;
   font-style: normal;

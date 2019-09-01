@@ -7,6 +7,12 @@ article.type-bip .entry-title > a {
   padding-right: 45px;
 }
 
+.bip-footer {
+  border: 1px solid currentColor;
+  padding: 1em;
+  column-count: 2;
+}
+
 .bip-footer p {
   margin-top: 0;
   margin-bottom: 0;

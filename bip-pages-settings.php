@@ -134,7 +134,22 @@ function sanitize( $input ) {
         $sanitized_input['email'] = sanitize_email( $input['email'] );
         break;
       case 'phone':
-        // @TODO add sanitize function for phone number
+        $phone = filter_var( $value, FILTER_SANITIZE_NUMBER_INT );
+        $phone = str_replace("-", "", $phone );
+
+        $length = strlen( $phone );
+
+        if ( $length == 9 ) {
+          // assume Polish number for now
+          $sanitized_input['phone'] = '+48' . $phone;
+        } elseif ( $length == 12 && strpos( $phone, '+' ) === 0 ) {
+          $sanitized_input['phone'] = $phone;
+        } elseif ( $length == 13 && strpos( $phone, '00' ) === 0 ) {
+          $sanitized_input['phone'] = $phone;
+        } else {
+          add_settings_error( OPTION_NAME, $option, esc_html__('Invalid phone number given.', 'bip-pages') );
+        }
+        break;
       default:
         $sanitized_input[$option] = sanitize_text_field( $value );
     }

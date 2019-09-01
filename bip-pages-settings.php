@@ -123,7 +123,7 @@ function sanitize( $input ) {
         if ( is_numeric( $value ) && /* post exists? */ get_post_status( $value ) !== false ) {
           $sanitized_input[$option] = $value;
         } else {
-          // @TODO display error message here
+          add_settings_error( OPTION_NAME, $option, esc_html__('test', 'bip-pages') );
         }
         break;
       case 'address':

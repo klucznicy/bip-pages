@@ -1,3 +1,5 @@
+<?= settings_errors( \BipPages\Settings\OPTION_NAME ); ?>
+
 <div class="wrap">
   <h1><?= esc_html__('BIP Pages Settings', 'bip-pages') ?></h1>
   <form method="post" action="options.php">

@@ -24,8 +24,7 @@ function notice_success() {
   $screen = get_current_screen();
 
   if ( $screen->id === 'bip_page_bip-pages-admin' ) {
-    if (isset($_GET['settings-updated'])) {
-      // @TODO check for errors
+    if (isset($_GET['settings-updated']) && empty( get_settings_errors() ) ) {
   ?>
   <div class="notice notice-success is-dismissible">
     <p><?php esc_html_e( 'Settings saved successfully.', 'bip-pages' ); ?></p>

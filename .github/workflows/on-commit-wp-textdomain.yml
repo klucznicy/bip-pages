@@ -1,0 +1,5 @@
+- name: WP Textdomain
+  uses: varunsridharan/action-wp-textdomain@1.0
+  env:
+    domain: 'bip-pages'
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

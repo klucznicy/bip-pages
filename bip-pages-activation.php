@@ -27,10 +27,20 @@ function create_page( $title, $content = '' ) {
   return $page_id;
 }
 
+function create_functional_page( $title, $content = '' ) {
+  if ( !is_page( $title ) ) {
+    $page_id = create_page( $title, $content );
+  } else {
+    $page_id = untrash_page( $title );
+  }
+
+  return $page_id;
+}
+
 function create_main_page() {
   $title = __( 'BIP Main Page', 'bip-pages' );
 
-  $main_page_id = create_page( $title );
+  $main_page_id = create_functional_page( $title );
 
   if ( !is_wp_error( $main_page_id ) ) {
     set_bip_main_page( $main_page_id );
@@ -43,13 +53,25 @@ function create_instructions_page() {
   // Polish only for now
   $instructions = file_get_contents( __DIR__ . '/boilerplate-text/bip-usage-manual-pl.txt' );
 
-  $instruction_page_id = create_page( $title, $instructions );
+  $instruction_page_id = create_functional_page( $title, $instructions );
 
   if ( !is_wp_error( $instruction_page_id ) ) {
     $option = get_option( Settings\OPTION_NAME, array() );
     $option['instruction_id'] = $instruction_page_id;
     update_option( Settings\OPTION_NAME, $option );
   }
+}
+
+function untrash_page( $title ) {
+  $page = WP_Post( $title );
+
+  if ( get_post_status( $page->ID ) == 'trash' ) {
+    untrash_post( $page );
+  } else {
+    // error handling here
+  }
+
+  return $page->ID;
 }
 
 function add_logo_widget() {
@@ -104,6 +126,6 @@ function activation_notice(){
         </div>
         <?php
 
-        delete_transient( 'fx-admin-notice-example' );
+        delete_transient( 'bip-pages-activation-msg' );
     }
 }

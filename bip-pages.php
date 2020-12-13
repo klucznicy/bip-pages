@@ -38,7 +38,6 @@ register_activation_hook( __FILE__, __NAMESPACE__ . '\activate' );
 register_deactivation_hook( __FILE__, __NAMESPACE__ . '\deactivate' );
 
 function include_submodules() {
-  include( 'bip-pages-activation.php' );
   include( 'bip-pages-main-page.php' );
   include( 'bip-pages-settings.php' );
   include( 'bip-pages-styling.php' );
@@ -46,42 +45,23 @@ function include_submodules() {
 }
 
 function activate() {
- add_option('Activated_Plugin','bip-pages'); // deleted later in post_activation_flow
+  add_option('Activated_Plugin','bip-pages'); // deleted later in post_activation_flow
 
- include_submodules();
+  include_submodules();
+  include( 'bip-pages-activation.php' );
 
- create_main_page();
- create_instructions_page();
- add_logo_widget();
+  create_main_page();
+  create_instructions_page();
+  add_logo_widget();
 }
 
 function deactivate() {
-  // remove widget data
-  delete_option( 'widget_bip-logo' );
-  $active_widgets = get_option( 'sidebars_widgets' );
+  include( 'bip-pages-deactivation.php' );
 
-  foreach ( $active_widgets as $key => $val ) {
-    if ( empty( $val ) || !is_array( $val ) ) {
-      continue;
-    }
+  set_transient( 'bip-pages-deactivation-msg', true, 5 );
 
-    $widget_ids = array_flip( $val );
-
-    foreach ( $widget_ids as $widget => $id ) {
-      if ( strpos( $widget, 'bip-logo-' ) === 0 ) {
-        unset( $active_widgets[$key][$id] );
-      }
-    }
-  }
-
-  update_option( 'sidebars_widgets', $active_widgets );
-
-  // turn all bip pages to regular pages
-  $bip_pages = get_pages( ['post_type' => 'bip'] );
-  foreach ( $bip_pages as $page ) {
-    $page->post_type = 'page';
-    wp_update_post( $page );
-  }
+  remove_widgets();
+  convert_page_types();
 }
 
 function register_css() {

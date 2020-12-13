@@ -42,6 +42,7 @@ function include_submodules() {
   include( 'bip-pages-settings.php' );
   include( 'bip-pages-styling.php' );
   include( 'bip-logo-widget.php' );
+  include( 'bip-pages-meta-boxes.php' );
 }
 
 function activate() {

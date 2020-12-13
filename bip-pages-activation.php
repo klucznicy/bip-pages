@@ -28,10 +28,15 @@ function create_page( $title, $content = '' ) {
 }
 
 function create_functional_page( $title, $content = '' ) {
-  if ( !is_page( $title ) ) {
-    $page_id = create_page( $title, $content );
+  $page = get_page_by_title( $title, OBJECT, 'bip' );
+
+  if ( $page && get_post_status( $page ) != 'trash' ) {
+    $page_id = $page->ID;
+  } elseif ( get_post_status( $page ) == 'trash' ) {
+    $new_page = wp_untrash_post( $page->ID );
+    $page_id = $new_page->ID;
   } else {
-    $page_id = untrash_page( $title );
+    $page_id = create_page( $title, $content );
   }
 
   return $page_id;
@@ -60,18 +65,6 @@ function create_instructions_page() {
     $option['instruction_id'] = $instruction_page_id;
     update_option( Settings\OPTION_NAME, $option );
   }
-}
-
-function untrash_page( $title ) {
-  $page = WP_Post( $title );
-
-  if ( get_post_status( $page->ID ) == 'trash' ) {
-    untrash_post( $page );
-  } else {
-    // error handling here
-  }
-
-  return $page->ID;
 }
 
 function add_logo_widget() {

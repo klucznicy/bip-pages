@@ -32,6 +32,10 @@ article.type-bip .entry-title > a {
   margin-right: 0.5em;
 }
 
+.bip-search form input[type=search] {
+  width: 100%;
+}
+
 .bip-address {
   margin: 1em 0;
   font-style: normal;

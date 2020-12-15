@@ -1,6 +1,10 @@
 <?php
 namespace BipPages;
 
+add_option( 'bip-pages-edit-access-role', 'contributor' );
+add_option( 'bip-pages-publish-access-role', 'editor' );
+add_option( 'bip-pages-delete-access-role', 'editor' );
+
 function create_page( $title, $content = '' ) {
   $page_id = \post_exists( $title );
 

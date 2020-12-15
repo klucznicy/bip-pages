@@ -45,6 +45,24 @@ function page_init() {
     __NAMESPACE__ . '\sanitize'
   );
 
+  register_setting(
+    'bip-pages', // Option group
+    'bip-pages-edit-access-role', // Option name
+    __NAMESPACE__ . '\validate_access_role'
+  );
+
+  register_setting(
+    'bip-pages', // Option group
+    'bip-pages-publish-access-role', // Option name
+    __NAMESPACE__ . '\validate_access_role'
+  );
+
+  register_setting(
+    'bip-pages', // Option group
+    'bip-pages-delete-access-role', // Option name
+    __NAMESPACE__ . '\validate_access_role'
+  );
+
   add_settings_section(
     'bip_pages_settings_main_page', // ID
     __('BIP Main Page settings', 'bip-pages'), // Title
@@ -107,6 +125,37 @@ function page_init() {
     'bip_pages_settings_instruction_page'
   );
 
+  add_settings_section(
+    'bip_pages_settings_access', // ID
+    __('BIP access settings', 'bip-pages'), // Title
+    '', // Callback (for help text if needed)
+    'bip-pages-admin' // Page
+  );
+
+  add_settings_field(
+    'bip_pages_edit_access_role',
+    __('Who can edit BIP pages', 'bip-pages'),
+    __NAMESPACE__ . '\edit_access_role_callback',
+    PAGE_NAME,
+    'bip_pages_settings_access'
+  );
+
+  add_settings_field(
+    'bip_pages_publish_access_role',
+    __('Who can publish BIP pages', 'bip-pages'),
+    __NAMESPACE__ . '\publish_access_role_callback',
+    PAGE_NAME,
+    'bip_pages_settings_access'
+  );
+
+  add_settings_field(
+    'bip_pages_delete_access_role',
+    __('Who can delete BIP pages', 'bip-pages'),
+    __NAMESPACE__ . '\delete_access_role_callback',
+    PAGE_NAME,
+    'bip_pages_settings_access'
+  );
+
 }
 add_action( 'admin_init', __NAMESPACE__ . '\page_init' );
 
@@ -116,6 +165,8 @@ add_action( 'admin_init', __NAMESPACE__ . '\page_init' );
 * @param array $input Contains all settings fields as array keys
 */
 function sanitize( $input ) {
+  $sanitized_input = array();
+
   foreach ( $input as $option => $value ) {
     switch ( $option ) {
       case 'id':
@@ -155,6 +206,10 @@ function sanitize( $input ) {
   }
 
   return $sanitized_input;
+}
+
+function validate_access_role( $role ) {
+  return get_role( $role ) ? $role : '';
 }
 
 function main_page_id_callback() {
@@ -237,6 +292,18 @@ function main_page_phone_callback() {
   );
 }
 
+function edit_access_role_callback() {
+  build_access_role_select( 'edit' );
+}
+
+function publish_access_role_callback() {
+  build_access_role_select( 'publish' );
+}
+
+function delete_access_role_callback() {
+  build_access_role_select( 'delete' );
+}
+
 /** add settings link to plugins **/
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), __NAMESPACE__ . '\action_links' );
 function action_links( $links, $plugin_file ) {
@@ -266,6 +333,16 @@ function build_input( $id, $type = 'text', $placeholder = '', $pattern = false )
   $element .= "/>";
 
   printf( $element, !empty( $values[$id] ) ? $values[$id] : '' );
+}
+
+function build_access_role_select( $cap ) {
+  $option = "bip-pages-{$cap}-access-role";
+  $value = get_option( $option );
+  $id_safe = esc_attr( $option );
+
+  echo "<select id='{$id_safe}' name='{$id_safe}'>";
+  wp_dropdown_roles( !empty( $value ) ? $value : '' );
+  ?></select><?php
 }
 
 function get_option_value( $opt ) {

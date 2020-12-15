@@ -1,10 +1,6 @@
 <?php
 namespace BipPages;
 
-add_option( 'bip-pages-edit-access-role', 'contributor' );
-add_option( 'bip-pages-publish-access-role', 'editor' );
-add_option( 'bip-pages-delete-access-role', 'editor' );
-
 function create_page( $title, $content = '' ) {
   $page_id = \post_exists( $title );
 
@@ -106,17 +102,15 @@ function post_activation_flow() {
   }
 }
 
-add_action( 'admin_notices', __NAMESPACE__ . '\activation_notice' );
-
-function activation_notice(){
+function activation_notice() {
     if( get_transient( 'bip-pages-activation-msg' ) ){
         ?>
-        <div class="updated notice is-dismissible">
+        <div class="notice updated is-dismissible">
             <p>
               <?= esc_html__( 'BIP Pages plugin has been activated. Use the settings page below to configure your main page.', 'bip-pages' ) ?>
             </p>
         </div>
-        <div class="updated notice is-dismissible">
+        <div class="notice updated is-dismissible">
             <p>
               <?= esc_html__( 'BIP Pages: your main page and BIP instructions page have been created automatically.', 'bip-pages' ) ?>
             </p>
@@ -126,3 +120,4 @@ function activation_notice(){
         delete_transient( 'bip-pages-activation-msg' );
     }
 }
+add_action( 'admin_notices', __NAMESPACE__ . '\activation_notice' );

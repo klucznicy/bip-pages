@@ -43,13 +43,17 @@ function include_submodules() {
   include( 'bip-pages-styling.php' );
   include( 'bip-logo-widget.php' );
   include( 'bip-pages-meta-boxes.php' );
+  include( 'bip-pages-activation.php' );
 }
 
 function activate() {
   add_option('Activated_Plugin','bip-pages'); // deleted later in post_activation_flow
 
+  add_option( 'bip-pages-edit-access-role', 'contributor' );
+  add_option( 'bip-pages-publish-access-role', 'editor' );
+  add_option( 'bip-pages-delete-access-role', 'editor' );
+
   include_submodules();
-  include( 'bip-pages-activation.php' );
 
   create_main_page();
   create_instructions_page();

@@ -2,7 +2,7 @@
 Contributors: (this should be a list of wordpress.org userid's)
 Donate link: https://klucznicy.org.pl/darowizny/
 Tags: comments, spam
-Requires at least: 5.6
+Requires at least: 4.5
 Tested up to: 5.6
 Stable tag: trunk
 Requires PHP: 7.0

@@ -1,4 +1,4 @@
-<img src="<?= $bip_logo_url ?>"
+<img src="<?= esc_url( $bip_logo_url ) ?>"
 	class="bip-main-logo"
 	alt="<?= esc_attr__( 'Biuletyn Informacji Publicznej', 'bip-pages' ) ?>"
 />
@@ -52,7 +52,7 @@
 
 <p>
 	<a href="<?= esc_url( $bip_instruction_url ) ?>">
-		<?= esc_html__( 'BIP pages usage manual', 'bip-pages') ?>
+		<?= esc_html__( 'BIP pages usage manual', 'bip-pages' ) ?>
 	</a>
 </p>
 

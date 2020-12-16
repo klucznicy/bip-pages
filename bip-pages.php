@@ -165,6 +165,33 @@ add_filter('single_template', __NAMESPACE__ . '\change_bip_template');
 function add_footer( $content ) {
   $post = get_post();
 
+  $custom = get_post_custom( $post->ID );
+
+  if ( !empty( $custom[ "_bip_prepared_by" ] ) && !empty( $custom[ "_bip_prepared_by" ][ 0 ] ) ) {
+    $prepared_by = $custom[ "_bip_prepared_by" ][ 0 ];
+  } else {
+    $prepared_by = get_the_author_link();
+  }
+
+  $creation_time = get_the_date( 'c' );
+  $last_mod_time = get_the_modified_date( 'c' );
+
+  $creation_tag = "<time datetime='{$creation_time}'>";
+  $creation_tag .= sprintf(
+    esc_html( '%s at %s', 'bip-pages' ),
+    get_the_date(),
+    get_the_time()
+  );
+  $creation_tag .= '</time>';
+
+  $last_modification_tag = "<time datetime='{$last_mod_time}'>";
+  $last_modification_tag .= sprintf(
+    esc_html( '%s at %s', 'bip-pages' ),
+    get_the_modified_date(),
+    get_the_modified_time()
+  );
+  $last_modification_tag .= '</time>';
+
   if ( is_single() && $post->post_type == 'bip' && $post->ID != get_bip_main_page() ) {
     ob_start();
     include( __DIR__ . '/templates/bip-page-footer-template.php' );

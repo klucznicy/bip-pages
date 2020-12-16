@@ -174,7 +174,8 @@ function sanitize( $input ) {
         if ( is_numeric( $value ) && /* post exists? */ get_post_status( $value ) !== false ) {
           $sanitized_input[$option] = $value;
         } else {
-          add_settings_error( OPTION_NAME, $option, esc_html__('Invalid page ID given for ' . $option, 'bip-pages') );
+          $msg = sprintf( esc_html__('Invalid page ID given for %s', 'bip-pages'), $option);
+          add_settings_error( OPTION_NAME, $option, $msg );
         }
         break;
       case 'address':
@@ -308,7 +309,7 @@ function delete_access_role_callback() {
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), __NAMESPACE__ . '\action_links' );
 function action_links( $links, $plugin_file ) {
   $settings_url = get_settings_url();
-  $links[] = "<a href='{$settings_url}'>" . __( 'Settings', 'bip-pages' ) . "</a>";
+  $links[] = "<a href='{$settings_url}'>" . esc_html__( 'Settings', 'bip-pages' ) . "</a>";
   return $links;
 }
 

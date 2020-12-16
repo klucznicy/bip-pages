@@ -1,7 +1,7 @@
 === BIP for Wordpress ===
 Contributors: (this should be a list of wordpress.org userid's)
 Donate link: https://klucznicy.org.pl/darowizny/
-Tags: comments, spam
+Tags: ngo, government, Poland
 Requires at least: 4.5
 Tested up to: 5.6
 Stable tag: trunk
@@ -34,4 +34,3 @@ Please submit a new issue in [BIP for Wordpress' github repo](https://github.com
 
 1. Default BIP main page
 2. Settings admin panel
-

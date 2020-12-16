@@ -174,6 +174,7 @@ function sanitize( $input ) {
         if ( is_numeric( $value ) && /* post exists? */ get_post_status( $value ) !== false ) {
           $sanitized_input[$option] = $value;
         } else {
+          /* translators: %s is internal option identifired, either "id" or "instruction_id" */
           $msg = sprintf( esc_html__('Invalid page ID given for %s', 'bip-pages'), $option);
           add_settings_error( OPTION_NAME, $option, $msg );
         }

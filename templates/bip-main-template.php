@@ -5,7 +5,7 @@
 <p>
 <?= esc_html( sprintf(
 	/* translators: %s is substituted with blog name */
-	__( 'Biuletyn Informacji Publicznej organizacji %s', 'bip-pages' ),
+	__( '%s: Biuletyn Informacji Publicznej', 'bip-pages' ),
 	get_bloginfo( 'name' )
 )); ?>
 </p>

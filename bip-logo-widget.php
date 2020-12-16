@@ -31,7 +31,7 @@ class BIP_Logo_Widget extends WP_Widget {
     public function widget( $args, $instance ) {
         $bip_main_page_url = esc_url( get_permalink( BipPages\get_bip_main_page() ) );
 
-        $alt = esc_attr__('BIP naszej organizacji', 'bip-pages');
+        $alt = esc_attr__("Our organization's BIP", 'bip-pages');
 
         echo $args['before_widget'];
 

@@ -1,21 +1,21 @@
-# Copyright (C) 2019 Łukasz Garczewski
+# Copyright (C) 2020 Łukasz Garczewski
 # This file is distributed under the same license as the BIP for WordPress plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: BIP for WordPress 1.0.0\n"
+"Project-Id-Version: BIP for WordPress 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bip-for-"
 "wordpress\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-09-02 02:34+0200\n"
-"PO-Revision-Date: 2019-09-02 02:42+0200\n"
+"POT-Creation-Date: 2020-12-16 03:02+0100\n"
+"PO-Revision-Date: 2020-12-16 03:14+0100\n"
 "X-Generator: Poedit 1.8.6\n"
 "X-Domain: bip-pages\n"
 "Last-Translator: \n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
 "Language: pl\n"
 
 #. Plugin Name of the plugin
@@ -31,8 +31,7 @@ msgid ""
 "A plugin adding BIP (Biuletyn Informacji Publicznej) functionality to "
 "WordPress"
 msgstr ""
-"Wtyczka dodająca funkcjonalność Biuletynu Informacji Publicznej do "
-"WordPressa"
+"Wtyczka dodająca funkcjonalność Biuletynu Informacji Publicznej do WordPressa"
 
 #. Author of the plugin
 msgid "Łukasz Garczewski"
@@ -42,20 +41,41 @@ msgstr ""
 msgid "https://klucznicy.org.pl/open-source/"
 msgstr ""
 
-#: bip-logo-widget.php:20 bip-logo-widget.php:40
-msgid "BIP naszej organizacji"
+#: bip-logo-widget.php:21
+msgid "BIP Logo Widget"
+msgstr "Widżet logo BIP"
+
+#: bip-logo-widget.php:34
+msgid "Our organization's BIP"
 msgstr "BIP naszej organizacji"
 
-#: bip-pages-activation.php:31 bip-pages-settings.php:57
+#: bip-logo-widget.php:51
+msgid "This widget displays the BIP logo with a link to your BIP main page."
+msgstr ""
+"Widżet wyświetla logo BIP z linkiem do strony głównej twojego biuletynu."
+
+#: bip-logo-widget.php:57
+msgid "Variant"
+msgstr "Wariant"
+
+#: bip-logo-widget.php:72
+msgid "Color"
+msgstr " Kolor"
+
+#: bip-logo-widget.php:87
+msgid "Language"
+msgstr "Język"
+
+#: bip-pages-activation.php:46 bip-pages-settings.php:75
 #: bip-pages-styling.php:27
 msgid "BIP Main Page"
 msgstr "Strona główna BIP"
 
-#: bip-pages-activation.php:41
+#: bip-pages-activation.php:56
 msgid "BIP usage manual"
 msgstr "Instrukcja obsługi BIP"
 
-#: bip-pages-activation.php:97
+#: bip-pages-activation.php:110
 msgid ""
 "BIP Pages plugin has been activated. Use the settings page below to "
 "configure your main page."
@@ -63,13 +83,22 @@ msgstr ""
 "Wtyczka BIP Pages została aktywowana. Skorzystaj z poniższej strony "
 "ustawień, aby skonfigurować swoją stronę główną."
 
-#: bip-pages-activation.php:102
+#: bip-pages-activation.php:115
 msgid ""
 "BIP Pages: your main page and BIP instructions page have been created "
 "automatically."
 msgstr ""
 "Strony BIP: strona główna i strona instrukcji BIP zostały utworzone "
 "automatycznie."
+
+#: bip-pages-deactivation.php:56
+msgid ""
+"BIP Pages plugin has been deactivated. Your BIP pages have been converted to "
+"standard pages (or drafts in case of a conflicting page title)"
+msgstr ""
+"Wtyczka BIP dla Wordpressa została wyłączona. Twoje strony BIP zostały "
+"automatycznie przekształcone w standardowe strony (lub szkice, w przypadku "
+"wystąpienia konfliktu nazw)."
 
 #: bip-pages-main-page.php:23 js/editor_notices.js:2
 msgid "You are editing the BIP main page."
@@ -81,8 +110,16 @@ msgid ""
 "will be displayed between the automatic BIP header and footer."
 msgstr ""
 "Część tej strony jest generowana automatycznie. Tekst, który wpiszesz "
-"poniżej, zostanie wyświetlony pomiędzy automatycznie generowanym "
-"nagłówkiem a stopką."
+"poniżej, zostanie wyświetlony pomiędzy automatycznie generowanym nagłówkiem "
+"a stopką."
+
+#: bip-pages-meta-boxes.php:8
+msgid "Content prepared by"
+msgstr "Dodatkowe ustawienia autora (treść przygotował(a))"
+
+#: bip-pages-meta-boxes.php:39
+msgid "Enter name and surname of content author"
+msgstr "Wprowadź imię i nazwisko osoby, która przygotowała treść strony BIP"
 
 #: bip-pages-settings.php:10 bip-pages-settings.php:11
 #: templates/bip-page-settings-template.php:4
@@ -93,71 +130,88 @@ msgstr "Ustawienia stron BIP"
 msgid "Settings saved successfully."
 msgstr "Ustawienia zostały zapisane."
 
-#: bip-pages-settings.php:50
+#: bip-pages-settings.php:68
 msgid "BIP Main Page settings"
 msgstr "Ustawienia strony głównej BIP"
 
-#: bip-pages-settings.php:65
+#: bip-pages-settings.php:83
 msgid "Organization Address"
 msgstr "Adres organizacji"
 
-#: bip-pages-settings.php:73
+#: bip-pages-settings.php:91
 msgid "E-Mail Address"
 msgstr "Adres e-mail"
 
-#: bip-pages-settings.php:81
+#: bip-pages-settings.php:99
 msgid "Phone Number"
 msgstr "Numer telefonu"
 
-#: bip-pages-settings.php:89
+#: bip-pages-settings.php:107
 msgid "Name of representative"
 msgstr "Imię i nazwisko redaktora BIP"
 
-#: bip-pages-settings.php:97
+#: bip-pages-settings.php:115
 msgid "BIP instruction page settings"
 msgstr "Ustawienia instrukcji obsługi BIP"
 
-#: bip-pages-settings.php:104
+#: bip-pages-settings.php:122
 msgid "Usage instruction page"
 msgstr "Strona z instrukcją obsługi"
 
-#: bip-pages-settings.php:126
-msgid "Invalid page ID given for "
-msgstr "Podano nieprawidłowe ID dla opcji"
+#: bip-pages-settings.php:130
+msgid "BIP access settings"
+msgstr "Konfiguracja uprawnień zarządzania stronami BIP"
 
-#: bip-pages-settings.php:149
+#: bip-pages-settings.php:137
+msgid "Who can edit BIP pages"
+msgstr "Kto może edytować strony BIP"
+
+#: bip-pages-settings.php:145
+msgid "Who can publish BIP pages"
+msgstr "Kto może zatwierdzać publikację stron BIP"
+
+#: bip-pages-settings.php:153
+msgid "Who can delete BIP pages"
+msgstr "Kto może usuwać strony BIP"
+
+#. translators: %s is internal option identifired, either "id" or "instruction_id"
+#: bip-pages-settings.php:178
+msgid "Invalid page ID given for %s"
+msgstr "Podano nieprawidłowe ID dla opcji %s"
+
+#: bip-pages-settings.php:202
 msgid "Invalid phone number given."
 msgstr "Podano nieprawidłowy numer telefonu."
 
-#: bip-pages-settings.php:162 bip-pages-settings.php:184
+#: bip-pages-settings.php:219 bip-pages-settings.php:241
 msgid "Not selected"
-msgstr ""
+msgstr "Nie dokonano wyboru"
 
-#: bip-pages-settings.php:173
+#: bip-pages-settings.php:230
 msgid "Edit BIP main page"
 msgstr "Edytuj stronę główną BIP"
 
-#: bip-pages-settings.php:195
+#: bip-pages-settings.php:252
 msgid "Edit BIP instruction page"
 msgstr "Edytuj stronę instrukcji obsługi BIP"
 
-#: bip-pages-settings.php:209
+#: bip-pages-settings.php:266
 msgid "The address of your organization"
 msgstr "Adres twojej organizacji"
 
-#: bip-pages-settings.php:221
+#: bip-pages-settings.php:278
 msgid "Full name of a BIP editor"
-msgstr "Imię i nazwisko jednej z osób redagującej BIP"
+msgstr "Imię i nazwisko jednej z osób redagujących BIP"
 
-#: bip-pages-settings.php:227
+#: bip-pages-settings.php:284
 msgid "Email to a BIP editor"
 msgstr "Adres mailowy redaktora BIP"
 
-#: bip-pages-settings.php:235
+#: bip-pages-settings.php:292
 msgid "Phone number to your organization"
 msgstr "Numer telefonu do twojej organizacji"
 
-#: bip-pages-settings.php:244
+#: bip-pages-settings.php:313
 msgid "Settings"
 msgstr "Ustawienia"
 
@@ -165,63 +219,63 @@ msgstr "Ustawienia"
 msgid "BIP Instruction Page"
 msgstr "Instrukcja obsługi BIP"
 
-#: bip-pages.php:94
+#: bip-pages.php:79
 msgctxt "Post type general name"
 msgid "BIP pages"
 msgstr "Strony BIP"
 
-#: bip-pages.php:95
+#: bip-pages.php:80
 msgctxt "Post type singular name"
 msgid "BIP page"
 msgstr "Strona BIP"
 
-#: bip-pages.php:96
+#: bip-pages.php:81
 msgctxt "Admin Menu text"
 msgid "BIP Pages"
 msgstr "Strony BIP"
 
-#: bip-pages.php:97
+#: bip-pages.php:82
 msgctxt "Add New on Toolbar"
 msgid "BIP page"
 msgstr "Strona BIP"
 
-#: bip-pages.php:98
+#: bip-pages.php:83
 msgid "Add New"
 msgstr "Dodaj nową"
 
-#: bip-pages.php:99
+#: bip-pages.php:84
 msgid "Add New BIP page"
 msgstr "Dodaj nową stronę BIP"
 
-#: bip-pages.php:100
+#: bip-pages.php:85
 msgid "New BIP page"
 msgstr "Nowa strona BIP"
 
-#: bip-pages.php:101
+#: bip-pages.php:86
 msgid "Edit BIP page"
 msgstr "Edytuj stronę BIP"
 
-#: bip-pages.php:102
+#: bip-pages.php:87
 msgid "View BIP page"
 msgstr "Wyświetl stronę BIP"
 
-#: bip-pages.php:103
+#: bip-pages.php:88
 msgid "All BIP pages"
 msgstr "Wszystkie strony BIP"
 
-#: bip-pages.php:104
+#: bip-pages.php:89
 msgid "Search BIP pages"
 msgstr "Szukaj na stronach BIP"
 
-#: bip-pages.php:105
+#: bip-pages.php:90
 msgid "Parent BIP pages:"
 msgstr "Nadrzędne strony BIP:"
 
-#: bip-pages.php:106
+#: bip-pages.php:91
 msgid "No BIP pages found."
 msgstr "Nie znaleziono stron BIP."
 
-#: bip-pages.php:107
+#: bip-pages.php:92
 msgid "No BIP pages found in Trash."
 msgstr "Nie znaleziono stron BIP w Koszu."
 
@@ -229,49 +283,54 @@ msgstr "Nie znaleziono stron BIP w Koszu."
 msgid "Biuletyn Informacji Publicznej"
 msgstr "Biuletyn Informacji Publicznej"
 
-#: templates/bip-main-template.php:7
-msgid "Biuletyn Informacji Publicznej organizacji %s"
-msgstr "Biuletyn Informacji Publicznej organizacji %s"
+#. translators: %s is substituted with blog name
+#: templates/bip-main-template.php:8
+msgid "%s: Biuletyn Informacji Publicznej"
+msgstr "%s: Biuletyn Informacji Publicznej"
 
-#: templates/bip-main-template.php:14
+#: templates/bip-main-template.php:15
 msgid "Address:"
 msgstr "Adres:"
 
-#: templates/bip-main-template.php:18
+#: templates/bip-main-template.php:19
 msgid "Editor:"
 msgstr "Redaktor:"
 
-#: templates/bip-main-template.php:24
+#: templates/bip-main-template.php:25
 msgid "E-mail address:"
-msgstr "Adres mailowy:"
+msgstr "Adres e-mail"
 
-#: templates/bip-main-template.php:30
+#: templates/bip-main-template.php:31
 msgid "Phone number:"
 msgstr "Numer telefonu:"
 
-#: templates/bip-main-template.php:43
+#: templates/bip-main-template.php:44
 msgid "Recently updated BIP pages"
 msgstr "Ostatnio zmienione lub dodane strony BIP"
 
-#: templates/bip-main-template.php:55
+#: templates/bip-main-template.php:56
 msgid "BIP pages usage manual"
 msgstr "Instrukcja obsługi stron BIP"
 
-#: templates/bip-page-footer-template.php:4
+#. translators: %s is the name of the original author of page contents
+#: templates/bip-page-footer-template.php:5
 msgid "Information prepared by: %s"
 msgstr "Informację przygotował(a): %s"
 
-#: templates/bip-page-footer-template.php:8
+#. translators: %s is the name of the user who published the page (may be a link)
+#: templates/bip-page-footer-template.php:11
 msgid "Published by: %s"
 msgstr "Opublikował(a): %s"
 
-#: templates/bip-page-footer-template.php:12
-msgid "Page created: <time>%s at %s</time>"
-msgstr "Stronę utworzono: <time>%s o %s</time>"
+#. translators: %s is the date and time of page creation
+#: templates/bip-page-footer-template.php:17
+msgid "Page created: %s"
+msgstr "Stronę utworzono: %s"
 
-#: templates/bip-page-footer-template.php:18
-msgid "Last updated: <time>%s at %s</time>"
-msgstr "Ostatnia zmiana: <time>%s o %s</time>"
+#. translators: %s is the date and time of last page modification
+#: templates/bip-page-footer-template.php:23
+msgid "Last updated: %s"
+msgstr "Ostatnia zmiana: %s"
 
 #: templates/bip-search-form.php:4
 msgctxt "label"

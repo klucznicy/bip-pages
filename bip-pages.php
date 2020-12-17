@@ -31,6 +31,7 @@ function plugin_init() {
   include_submodules();
 
   add_action('wp_enqueue_scripts', __NAMESPACE__ . '\register_css');
+  add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\register_css' );
 }
 add_action('plugins_loaded', __NAMESPACE__ . '\plugin_init');
 

@@ -28,19 +28,18 @@ function main_page_edit_notice() {
 add_action( 'admin_notices', __NAMESPACE__ . '\main_page_edit_notice' );
 
 function enqueue_editor_notices() {
-  if ( is_bip_main_page_edit_screen() ) {
-    wp_enqueue_script(
-          'bip-editor-notices',
-          plugin_dir_url( __FILE__ ) . '/js/editor_notices.js',
-          array( 'wp-notices', 'wp-i18n', 'wp-editor' )
-      );
-      $script_params = [
-        'currently_edited_post' => $_GET['post'],
-        'bip_main_page_id' => get_option( Settings\OPTION_NAME )['id']
-      ];
-      wp_localize_script( 'bip-editor-notices', 'scriptParams', $script_params );
-      wp_set_script_translations( 'bip-editor-notices', 'bip-pages' );
-    }
+  // only proceed if user is editing BIP main page
+  if ( !is_bip_main_page_edit_screen() ) {
+    return;
+  }
+
+  wp_enqueue_script(
+        'bip-editor-notices',
+        plugin_dir_url( __FILE__ ) . '/js/editor_notices.js',
+        array( 'wp-notices', 'wp-i18n', 'wp-editor' )
+    );
+
+  wp_set_script_translations( 'bip-editor-notices', 'bip-pages' );
 }
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_notices' );
 

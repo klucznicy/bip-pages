@@ -1,4 +1,4 @@
-# BIP for Wordpress
+# BIP Pages
 
 A Wordpress plugin for easy creation of Polish public information bulletin (Biuletyn Informacji Publicznej, or BIP) websites by NGOs and institutions.
 

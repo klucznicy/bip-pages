@@ -1,4 +1,4 @@
-=== BIP for Wordpress ===
+=== BIP Pages ===
 Contributors: lgarczewski
 Donate link: https://klucznicy.org.pl/darowizny/
 Tags: ngo, government, Poland
@@ -9,11 +9,11 @@ Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-A Wordpress plugin for easy creation of Polish public information bulletin (Biuletyn Informacji Publicznej, or BIP) websites by NGOs and institutions.
+A Wordpress plugin for easy creation of Polish "public information bulletin" (Biuletyn Informacji Publicznej, or BIP) websites by NGOs and institutions.
 
 == Description ==
 
-A Wordpress plugin for easy creation of Polish public information bulletin (Biuletyn Informacji Publicznej, or BIP) websites by NGOs and institutions.
+A Wordpress plugin for easy creation of Polish "public information bulletin" (Biuletyn Informacji Publicznej, or BIP) websites by NGOs and institutions.
 
 Available in Polish and in English.
 

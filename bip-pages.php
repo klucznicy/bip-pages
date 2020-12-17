@@ -106,48 +106,12 @@ function register_bip_page_type() {
         'menu_position'      => 21,
         'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'revisions' ),
         'delete_with_user'   => false,
-        'show_in_rest'       => true,
-        'capabilities' => array(
-          'edit_post' => 'edit_bip',
-          'edit_posts' => 'edit_bips',
-          'edit_others_posts' => 'edit_other_bips',
-          'publish_posts' => 'publish_bips',
-          'delete_post' => 'delete_bip'
-        ),
-        'map_meta_cap' => true
+        'show_in_rest'       => true
     );
 
     register_post_type( 'bip', $args );
 }
 add_action( 'init', __NAMESPACE__ . '\register_bip_page_type' );
-
-function add_caps() {
-    $admins = get_role( 'administrator' );
-
-    $admins->add_cap( 'edit_bip' );
-    $admins->add_cap( 'edit_bips' );
-    $admins->add_cap( 'edit_other_bips' );
-    $admins->add_cap( 'publish_bips' );
-    $admins->add_cap( 'delete_bip' );
-
-    $bip_role_publish = get_option( 'bip-pages-publish-access-role' );
-    $publishers = get_role( $bip_role_publish );
-
-    $publishers->add_cap( 'edit_bip' );
-    $publishers->add_cap( 'edit_bips' );
-    $publishers->add_cap( 'edit_other_bips' );
-    $publishers->add_cap( 'publish_bips' );
-
-    $bip_role_delete = get_option( 'bip-pages-delete-access-role' );
-    $deleters = get_role( $bip_role_delete );
-    $deleters->add_cap( 'delete_bip' );
-
-    $bip_role_edit = get_option( 'bip-pages-edit-access-role' );
-    $editors = get_role( $bip_role_edit );
-
-    $editors->add_cap( 'edit_bip' );
-}
-add_action( 'admin_init', __NAMESPACE__ . '\add_caps');
 
 function change_bip_template( $single_template ) {
   $post = get_post();

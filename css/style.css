@@ -56,6 +56,6 @@ article.type-bip .entry-title > a {
   text-decoration: none;
 }
 
-.widget_bip-logo a img {
+img.bip-widget-logo {
   width: 250px;
 }

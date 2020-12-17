@@ -29,75 +29,23 @@ class BIP_Logo_Widget extends WP_Widget {
     );
 
     public function widget( $args, $instance ) {
-        $bip_main_page_url = esc_url( get_permalink( BipPages\get_bip_main_page() ) );
+        $instance = $this->set_defaults( $instance );
 
-        $alt = esc_attr__("Our organization's BIP", 'bip-pages');
+        $image_url = plugin_dir_url( __FILE__ ) . $this->get_image_filename( $instance );
 
         echo $args['before_widget'];
 
-        echo "<a href='{$bip_main_page_url}'>";
-
-        $instance = $this->set_defaults( $instance );
-
-        $image = 'bip-' . $instance['variant'] . '-' . $instance['color'] . '-' . $instance['language'];
-
-        echo "<img src='" . plugin_dir_url( __FILE__ ) . "assets/bip-logos/{$image}_500px.png' alt='{$alt}' />";
-        echo '</a>';
+        include( 'bip-logo-widget-template.php' );
 
         echo $args['after_widget'];
     }
 
     public function form( $instance ) {
-        echo '<p>' . esc_html__( 'This widget displays the BIP logo with a link to your BIP main page.', 'bip-pages') . '</p>';
-
         $instance = $this->set_defaults( $instance );
 
-        ?>
-<fieldset>
-  <legend><?= esc_html__('Variant', 'bip-pages'); ?></legend>
+        $image_url = plugin_dir_url( __FILE__ ) . $this->get_image_filename( $instance );
 
-<?php
-  foreach ( $this->image_variants as $variant ) {
-?>
-  <input type="radio" value="<?= esc_attr( $variant ); ?>"
-    id="<?= esc_attr( $this->get_field_id( 'variant' ) ); ?>"
-    name="<?= esc_attr( $this->get_field_name( 'variant' ) ); ?>"
-    <?= $instance['variant'] == $variant ? 'checked' : '' ?>
-  >
-  <label><?= esc_html__( $variant, 'bip-pages' ); ?></label>
-<?php } ?>
-</fieldset>
-
-<fieldset>
-  <legend><?= esc_html__('Color','bip-pages') ?></legend>
-
-  <?php
-    foreach ( $this->image_colors as $color ) {
-  ?>
-    <input type="radio" value="<?= esc_attr( $color ); ?>"
-      id="<?= esc_attr( $this->get_field_id( 'color' ) ); ?>"
-      name="<?= esc_attr( $this->get_field_name( 'color' ) ); ?>"
-      <?= $instance['color'] == $color ? 'checked' : '' ?>
-    >
-    <label><?= esc_html__( $color, 'bip-pages' ); ?></label>
-  <?php } ?>
-</fieldset>
-
-<fieldset>
-  <legend><?= esc_html__('Language','bip-pages'); ?></legend>
-
-  <?php
-    foreach ( $this->image_languages as $language ) {
-  ?>
-    <input type="radio" value="<?= esc_attr( $language ); ?>"
-      id="<?= esc_attr( $this->get_field_id( 'language' ) ); ?>"
-      name="<?= esc_attr( $this->get_field_name( 'language' ) ); ?>"
-      <?= $instance['language'] == $language ? 'checked' : '' ?>
-    >
-    <label><?= esc_html__( $language, 'bip-pages' ); ?></label>
-  <?php } ?>
-</fieldset>
-        <?php
+        include( 'templates/bip-logo-widget-options-template.php' );
     }
 
     public function update( $new_instance, $old_instance ) {
@@ -115,10 +63,18 @@ class BIP_Logo_Widget extends WP_Widget {
           $instance['color'] = $old_instance['color'];
         }
 
-        if ( in_array( $new_instance['language'], $this->image_languages ) ) {
+        if ( $instance['variant'] == 'simple' ) {
+          // simple variant does not support language
+          // $instance['language'] = '';
+        } elseif ( in_array( $new_instance['language'], $this->image_languages ) ) {
           $instance['language'] = $new_instance['language'];
         } else {
           $instance['language'] = $old_instance['language'];
+        }
+
+        if ( !file_exists( plugin_dir_path( __FILE__ ) . '/' . $this->get_image_filename( $instance ) ) ) {
+          // @TODO display error to user
+          return $old_instance;
         }
 
         return $instance;
@@ -135,11 +91,15 @@ class BIP_Logo_Widget extends WP_Widget {
         $instance['color'] = $this->image_colors[0];
       }
 
-      if ( empty( $instance['language'] ) ) {
+      if ( $instance['variant'] != 'simple' && empty( $instance['language'] ) ) {
         $instance['language'] = $this->image_languages[0];
       }
 
       return $instance;
+    }
+
+    private function get_image_filename( $instance ) {
+      return "assets/bip-logos/bip-" . implode( '-', $instance ) . "_500px.png";
     }
 }
 add_action( 'widgets_init', function() {

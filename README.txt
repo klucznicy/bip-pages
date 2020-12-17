@@ -1,5 +1,5 @@
 === BIP for Wordpress ===
-Contributors: (this should be a list of wordpress.org userid's)
+Contributors: lgarczewski
 Donate link: https://klucznicy.org.pl/darowizny/
 Tags: ngo, government, Poland
 Requires at least: 4.5

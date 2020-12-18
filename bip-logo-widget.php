@@ -35,7 +35,7 @@ class BIP_Logo_Widget extends WP_Widget {
 
         echo $args['before_widget'];
 
-        include( 'bip-logo-widget-template.php' );
+        include( 'templates/bip-logo-widget-template.php' );
 
         echo $args['after_widget'];
     }

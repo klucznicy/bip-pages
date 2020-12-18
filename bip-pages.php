@@ -127,8 +127,16 @@ function change_bip_template( $single_template ) {
 }
 add_filter('single_template', __NAMESPACE__ . '\change_bip_template');
 
-function add_footer( $content ) {
+function add_footer( $content = '', $echo = false ) {
   $post = get_post();
+
+  if ( !is_single() || $post->post_type != 'bip' ) {
+    return $content;
+  }
+
+  if ( $post->ID == get_bip_main_page() && !$echo ) {
+    return $content;
+  }
 
   $custom = get_post_custom( $post->ID );
 
@@ -157,10 +165,12 @@ function add_footer( $content ) {
   );
   $last_modification_tag .= '</time>';
 
-  if ( is_single() && $post->post_type == 'bip' && $post->ID != get_bip_main_page() ) {
-    ob_start();
-    include( __DIR__ . '/templates/bip-page-footer-template.php' );
-    $content .= ob_get_clean();
+  if ( !$echo ) {
+      ob_start();
+  }
+  include( __DIR__ . '/templates/bip-page-footer-template.php' );
+  if ( !$echo ) {
+      $content .= ob_get_clean();
   }
 
   return $content;

@@ -1,3 +1,4 @@
+<?php namespace BipPages; ?>
 <img src="<?= esc_url( $bip_logo_url ) ?>"
 	class="bip-main-logo"
 	alt="<?= esc_attr__( 'Biuletyn Informacji Publicznej', 'bip-pages' ) ?>"
@@ -39,7 +40,7 @@
 <?php include( 'bip-search-form.php' ); ?>
 </div>
 
-<?= $bip_main_page_content ?>
+<?= $bip_main_page_content; ?>
 
 <h2><?= esc_html__( 'Recently updated BIP pages', 'bip-pages' ) ?></h2>
 <ul>
@@ -57,4 +58,4 @@
 	</a>
 </p>
 
-<?php include( __DIR__ . '/bip-page-footer-template.php' ); ?>
+<?php add_footer( '', true ); ?>

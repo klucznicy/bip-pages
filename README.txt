@@ -4,7 +4,7 @@ Donate link: https://klucznicy.org.pl/darowizny/
 Tags: ngo, government, Poland
 Requires at least: 4.5
 Tested up to: 5.6
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -36,3 +36,13 @@ Please submit a new issue in [BIP for Wordpress' github repo](https://github.com
 
 1. Default BIP main page
 2. Settings admin panel
+
+== Changelog ==
+
+= 1.1.1 =
+* Handful of various bug fixes
+
+== Upgrade Notice ==
+
+= 1.1.1 =
+Corrects bugs introduced in preparation for Wordpress release.

@@ -6,7 +6,7 @@ function add_basic_main_page_data( $content ) {
   if ( $post->ID == get_bip_main_page() ) {
     $options = get_option( Settings\OPTION_NAME );
     $bip_main_page_content = $content;
-    $bip_logo_url = plugin_dir_url( __FILE__ ) . 'assets/bip-logos/bip-color-pl_min.png';
+    $bip_logo_url = plugin_dir_url( __FILE__ ) . 'assets/bip-logos/bip-full-color-pl_min.png';
     $bip_instruction_url = get_permalink( get_bip_instruction_page() );
 
     ob_start();

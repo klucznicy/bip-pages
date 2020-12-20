@@ -58,7 +58,6 @@ function activate() {
 
   create_main_page();
   create_instructions_page();
-  add_logo_widget();
 }
 
 function deactivate() {

@@ -67,30 +67,6 @@ function create_instructions_page() {
   }
 }
 
-function add_logo_widget() {
-  // initialize widget properties if not set yet
-  if ( empty( get_option( 'widget_bip-logo' ) ) ) {
-    $widget_options = array(
-      1 => array( 'image_type' => 1 ),
-    );
-
-    update_option( 'widget_bip-logo', $widget_options );
-  }
-
-  $active_widgets = get_option( 'sidebars_widgets' );
-
-  next( $active_widgets ); // skip first element, which is wp_inactive_widgets
-
-  $first_sidebar = current( $active_widgets );
-  $first_sidebar_key = key( $active_widgets );
-
-  array_unshift( $first_sidebar, 'bip-logo-1' );
-
-  $active_widgets[$first_sidebar_key] = $first_sidebar;
-
-  update_option( 'sidebars_widgets', $active_widgets );
-}
-
 add_action('admin_init', __NAMESPACE__ . '\post_activation_flow');
 function post_activation_flow() {
   if( is_admin() && get_option('Activated_Plugin') == 'bip-pages' ) {

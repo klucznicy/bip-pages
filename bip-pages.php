@@ -193,6 +193,31 @@ function set_bip_main_page( $id ) {
   return Settings\set_option_value( 'id', $id );
 }
 
+function add_bip_main_page_to_main_page_dropdown( $output, $parsed_args, $pages ){
+    if ( 'page_on_front' !== $parsed_args['name'] ) {
+      return $output;
+    }
+
+    $bip_pages = get_posts( array(
+      'post_type' => 'bip',
+      'post__in' => array( get_bip_main_page() )
+    ));
+
+    if ( !empty( $bip_pages ) ) {
+      // first remove the closing tag, i.e. </select>\n
+      $new_output = substr( $output, 0, -10 );
+
+      // then add additional option
+      $new_output .= walk_page_dropdown_tree( $bip_pages, $parsed_args['depth'], $parsed_args );
+
+      // then re-add closing tag
+      $new_output .= substr( $output, -10 );
+    }
+
+    return $new_output;
+}
+add_filter( 'wp_dropdown_pages', __NAMESPACE__ . '\add_bip_main_page_to_main_page_dropdown', 10, 3 );
+
 /** instruction page **/
 function get_bip_instruction_page() {
   return Settings\get_option_value( 'instruction_id' );

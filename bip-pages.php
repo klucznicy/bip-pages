@@ -184,6 +184,31 @@ function redirect_to_bip_main_page() {
 }
 add_action( 'template_redirect', __NAMESPACE__ . '\redirect_to_bip_main_page' );
 
+function enqueue_editor_notices() {
+  global $post;
+
+  // only proceed if user is editing a BIP page
+  if ( get_post_type( $post ) != 'bip' ) {
+    return;
+  }
+
+  wp_enqueue_script(
+        'bip-editor-notices',
+        plugin_dir_url( __FILE__ ) . '/js/editor_notices.js',
+        array( 'wp-notices', 'wp-i18n', 'wp-editor', 'jquery' )
+    );
+
+    $vars = array(
+      'bip_main_page' => get_bip_main_page(),
+      'bip_current_id' => $post->ID
+    );
+
+    wp_localize_script( 'bip-editor-notices', 'bip_pages_vars', $vars );
+
+  wp_set_script_translations( 'bip-editor-notices', 'bip-pages' );
+}
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_notices' );
+
 /** main page **/
 function get_bip_main_page() {
   return Settings\get_option_value( 'id' );

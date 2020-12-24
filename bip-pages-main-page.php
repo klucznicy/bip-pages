@@ -22,26 +22,10 @@ function main_page_edit_notice() {
   if ( is_bip_main_page_edit_screen() ) {
     $message = '<p>' . esc_html__( 'You are editing the BIP main page.', 'bip-pages' ) . '</p>' .
       '<p>' . esc_html__( 'Parts of this page are automatically generated. The text you enter below will be displayed between the automatic BIP header and footer.', 'bip-pages' ) . '</p>';
-    echo "<div class='notice notice-info is-dismissible'>{$message}</div>";
+    echo "<div class='notice is-info is-dismissible'>{$message}</div>";
   }
 }
 add_action( 'admin_notices', __NAMESPACE__ . '\main_page_edit_notice' );
-
-function enqueue_editor_notices() {
-  // only proceed if user is editing BIP main page
-  if ( !is_bip_main_page_edit_screen() ) {
-    return;
-  }
-
-  wp_enqueue_script(
-        'bip-editor-notices',
-        plugin_dir_url( __FILE__ ) . '/js/editor_notices.js',
-        array( 'wp-notices', 'wp-i18n', 'wp-editor' )
-    );
-
-  wp_set_script_translations( 'bip-editor-notices', 'bip-pages' );
-}
-add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_notices' );
 
 function is_bip_main_page_edit_screen() {
   return isset( $_GET['action'] ) &&

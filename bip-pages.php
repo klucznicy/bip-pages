@@ -202,17 +202,20 @@ function enqueue_editor_notices() {
 }
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_notices' );
 
-function warn_about_username_display_format() {
+function has_valid_username_display_format() {
   $user = wp_get_current_user();
 
-  if (
-    empty( $user->first_name ) ||
-    empty( $user->last_name ) ||
+  return
+    $user->first_name &&
+    $user->last_name &&
     (
-      $user->display_name !== $user->first_name . ' ' . $user->last_name &&
-      $user->display_name !== $user->last_name . ' ' . $user->first_name
-    )
-  ) {
+      $user->display_name == $user->first_name . ' ' . $user->last_name ||
+      $user->display_name == $user->last_name . ' ' . $user->first_name
+    );
+}
+
+function warn_about_username_display_format() {
+  if ( !has_valid_username_display_format() ) {
     $class = 'notice notice-warning is-dismissible';
 
     $url = admin_url( 'profile.php' );

@@ -2,7 +2,7 @@
 Contributors: lgarczewski
 Donate link: https://klucznicy.org.pl/darowizny/
 Tags: ngo, government, Poland
-Requires at least: 4.5
+Requires at least: 5.0
 Tested up to: 5.6
 Stable tag: 1.1.1
 Requires PHP: 7.0

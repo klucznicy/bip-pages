@@ -22,17 +22,17 @@ article.type-bip .entry-title > a {
   float: right;
 }
 
-.bip-search {
+form.bip-search {
   margin: 1em 0;
 }
 
-.bip-search form label {
+form.bip-search label {
   width: 80%;
   float: left;
   margin-right: 0.5em;
 }
 
-.bip-search form input[type=search] {
+form.bip-search input[type=search] {
   width: 100%;
 }
 

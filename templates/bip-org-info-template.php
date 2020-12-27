@@ -1,15 +1,4 @@
 <?php namespace BipPages; ?>
-<img src="<?= esc_url( $bip_logo_url ) ?>"
-	class="bip-main-logo"
-	alt="<?= esc_attr__( 'Biuletyn Informacji Publicznej', 'bip-pages' ) ?>"
-/>
-<p>
-<?= esc_html( sprintf(
-	/* translators: %s is substituted with blog name */
-	__( '%s: Biuletyn Informacji Publicznej', 'bip-pages' ),
-	get_bloginfo( 'name' )
-)); ?>
-</p>
 
 <address class="bip-address">
 	<p>
@@ -35,19 +24,3 @@
 		</a>
 	</p>
 </address>
-
-<h2><?= esc_html__( 'Recently updated BIP pages', 'bip-pages' ) ?></h2>
-<ul>
-<?php wp_list_pages( [
-	'title_li' => '',
-	'post_type' => 'bip',
-	'sort_column' => 'post_modified',
-	'number' => 10
-] ) ?>
-</ul>
-
-<p>
-	<a href="<?= esc_url( $bip_instruction_url ) ?>">
-		<?= esc_html__( 'BIP pages usage manual', 'bip-pages' ) ?>
-	</a>
-</p>

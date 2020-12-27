@@ -45,6 +45,7 @@ function include_submodules() {
   include( 'bip-logo-widget.php' );
   include( 'bip-pages-meta-boxes.php' );
   include( 'bip-pages-activation.php' );
+  include( 'blocks/bip-blocks.php' );
 }
 
 function activate() {
@@ -56,8 +57,8 @@ function activate() {
 
   include_submodules();
 
-  create_main_page();
   create_instructions_page();
+  create_main_page(); // includes link to instructions page so needs to go 2nd
 }
 
 function deactivate() {
@@ -126,14 +127,10 @@ function change_bip_template( $single_template ) {
 }
 add_filter('single_template', __NAMESPACE__ . '\change_bip_template');
 
-function add_footer( $content = '', $echo = false ) {
+function add_footer( $content = '' ) {
   $post = get_post();
 
   if ( !is_single() || $post->post_type != 'bip' ) {
-    return $content;
-  }
-
-  if ( $post->ID == get_bip_main_page() && !$echo ) {
     return $content;
   }
 
@@ -164,13 +161,9 @@ function add_footer( $content = '', $echo = false ) {
   );
   $last_modification_tag .= '</time>';
 
-  if ( !$echo ) {
-      ob_start();
-  }
+  ob_start();
   include( __DIR__ . '/templates/bip-page-footer-template.php' );
-  if ( !$echo ) {
-      $content .= ob_get_clean();
-  }
+  $content .= ob_get_clean();
 
   return $content;
 }

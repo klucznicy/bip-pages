@@ -1,4 +1,4 @@
-<form role="search" method="get" action="<?= esc_url( home_url( '/' ) ) ?>">
+<form class="bip-search" role="search" method="get" action="<?= esc_url( home_url( '/' ) ) ?>">
 	<label>
   	<span class="screen-reader-text">
 			<?= esc_html_x( 'Search for BIP pages:', 'label', 'bip-pages' ) ?>

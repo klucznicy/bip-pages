@@ -1,0 +1,13 @@
+form.bip-search {
+  margin: 1em 0;
+}
+
+form.bip-search label {
+  width: 80%;
+  float: left;
+  margin-right: 0.5em;
+}
+
+form.bip-search input[type=search] {
+  width: 100%;
+}

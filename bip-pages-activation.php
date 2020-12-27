@@ -44,8 +44,14 @@ function create_functional_page( $title, $content = '' ) {
 
 function create_main_page() {
   $title = __( 'BIP Main Page', 'bip-pages' );
+  $bip_instruction_url = get_permalink( get_bip_instruction_page() );
 
-  $main_page_id = create_functional_page( $title );
+  // Polish only for now
+  ob_start();
+  include( 'boilerplate-text/bip-main-page-pl.php');
+  $content = ob_get_clean();
+
+  $main_page_id = create_functional_page( $title, $content );
 
   if ( !is_wp_error( $main_page_id ) ) {
     set_bip_main_page( $main_page_id );

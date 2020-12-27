@@ -1,11 +1,11 @@
 <?php
 namespace BipPages;
 
+/** disabled for now **/
 function add_basic_main_page_data( $content ) {
   $post = get_post();
   if ( $post->ID == get_bip_main_page() ) {
     $options = get_option( Settings\OPTION_NAME );
-    $bip_main_page_content = $content;
     $bip_logo_url = plugin_dir_url( __FILE__ ) . 'assets/bip-logos/bip-full-color-pl_min.png';
     $bip_instruction_url = get_permalink( get_bip_instruction_page() );
 
@@ -16,12 +16,12 @@ function add_basic_main_page_data( $content ) {
 
   return $content;
 }
-add_filter('the_content', __NAMESPACE__ . '\add_basic_main_page_data' );
+// add_filter('the_content', __NAMESPACE__ . '\add_basic_main_page_data' );
 
 function main_page_edit_notice() {
   if ( is_bip_main_page_edit_screen() ) {
     $message = '<p>' . esc_html__( 'You are editing the BIP main page.', 'bip-pages' ) . '</p>' .
-      '<p>' . esc_html__( 'Parts of this page are automatically generated. The text you enter below will be displayed between the automatic BIP header and footer.', 'bip-pages' ) . '</p>';
+      '<p>' . esc_html__( "This page needs to include the BIP logo, your organization's address, a BIP search module, and a link to the instruction page.", 'bip-pages' ) . '</p>';
     echo "<div class='notice is-info is-dismissible'>{$message}</div>";
   }
 }

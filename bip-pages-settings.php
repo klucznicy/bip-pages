@@ -13,12 +13,26 @@ function register_options_page() {
     PAGE_NAME,
     __NAMESPACE__ . '\render_admin_page'
   );
+
+  add_submenu_page(
+    'edit.php?post_type=bip',
+    __( 'BIP Help & Checklist', 'bip-pages' ),
+    __( 'BIP Help & Checklist', 'bip-pages' ),
+    'manage_options',
+    'bip-pages-checklist',
+    __NAMESPACE__ . '\render_checklist_page'
+  );
 }
 add_action( 'admin_menu', __NAMESPACE__ . '\register_options_page' );
 
 function render_admin_page() {
   include( "templates/bip-page-settings-template.php" );
 }
+
+function render_checklist_page() {
+  include( "templates/bip-page-checklist-template.php" );
+}
+
 
 function notice_success() {
   $screen = get_current_screen();

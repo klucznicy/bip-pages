@@ -35,7 +35,7 @@ add_action( 'init', 'recently_modified_register_block' );
 
 function recently_modified_dynamic_render_callback( $block_attributes, $content ) {
 		ob_start();
-		include( __DIR__ . '/../templates/bip-recently-modified-template.php' );
+		include( __DIR__ . '/../../templates/bip-recently-modified-template.php' );
 		$el = ob_get_clean();
 
     return $el;

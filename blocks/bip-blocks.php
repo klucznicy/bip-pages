@@ -18,6 +18,6 @@ function add_block_category( $categories, $post ) {
 }
 add_filter( 'block_categories', __NAMESPACE__ . '\add_block_category', 10, 2 );
 
-include( 'bip-org-info-block.php' );
-include( 'bip-search-block.php' );
-include( 'bip-recently-modified-block.php' );
+include( 'org-info/bip-org-info-block.php' );
+include( 'search/bip-search-block.php' );
+include( 'recently-modified/bip-recently-modified-block.php' );

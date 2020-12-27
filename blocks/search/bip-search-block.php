@@ -46,7 +46,7 @@ function search_dynamic_render_callback( $block_attributes, $content ) {
 	$options = get_option( BipPages\Settings\OPTION_NAME );
 
 	ob_start();
-	include( __DIR__ . '/../templates/bip-search-form.php' );
+	include( __DIR__ . '/../../templates/bip-search-form.php' );
 	$el = ob_get_clean();
 
     return $el;

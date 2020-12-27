@@ -170,7 +170,7 @@ function add_footer( $content = '' ) {
 add_filter('the_content', __NAMESPACE__ . '\add_footer' );
 
 function redirect_to_bip_main_page() {
-  if ( is_post_type_archive( 'bip' ) ) {
+  if ( is_post_type_archive( 'bip' ) && !is_search() ) {
     wp_redirect( get_permalink( get_post( get_bip_main_page() ) ), '301' );
     exit;
   }

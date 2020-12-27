@@ -43,7 +43,6 @@ add_action( 'init', 'org_info_register_block' );
 
 function org_info_dynamic_render_callback( $block_attributes, $content ) {
 		$options = get_option( BipPages\Settings\OPTION_NAME );
-		$bip_logo_url = plugin_dir_url( __FILE__ ) . '../../assets/bip-logos/bip-full-color-pl_min.png';
 
 		ob_start();
 		include( __DIR__ . '/../../templates/bip-org-info-template.php' );

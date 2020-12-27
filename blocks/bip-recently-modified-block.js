@@ -7,7 +7,6 @@
 		icon: 'clock',
 		category: 'bip',
 		example: {},
-    supports: {multiple: false},
     save: function() { return null; },
 		edit: function() {
 			return el( 'p', {}, __( 'Recently updated BIP pages', 'bip-pages' ) );

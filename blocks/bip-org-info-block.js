@@ -3,7 +3,7 @@
 	var __ = i18n.__;
 
 	blocks.registerBlockType( 'bip-pages/org-info', {
-		title: __( 'BIP Org info', 'gutenberg-examples' ),
+		title: __( 'BIP Org info', 'bip-pages' ),
 		icon: 'id-alt',
 		category: 'bip',
 		example: {},

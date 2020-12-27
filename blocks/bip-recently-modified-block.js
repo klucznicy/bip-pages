@@ -3,14 +3,14 @@
 	var __ = i18n.__;
 
 	blocks.registerBlockType( 'bip-pages/recently-modified', {
-		title: __( 'BIP Recently Modified', 'bip-pages' ),
+		title: __( 'Recently Modified BIP Pages', 'bip-pages' ),
 		icon: 'clock',
 		category: 'bip',
 		example: {},
     supports: {multiple: false},
     save: function() { return null; },
 		edit: function() {
-			return el( 'p', {}, 'Recently Modified' );
+			return el( 'p', {}, __( 'Recently updated BIP pages', 'bip-pages' ) );
 		}
 	} );
 } )( window.wp.blocks, window.wp.i18n, window.wp.element );

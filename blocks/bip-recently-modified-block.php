@@ -18,7 +18,6 @@ function recently_modified_register_block() {
 
 	register_block_type( 'bip-pages/recently-modified', array(
 		'editor_script' => 'bip-recently-modified-block',
-  //  'editor_style' => 'bip-org-info-block-editor',
 		'render_callback' => 'recently_modified_dynamic_render_callback'
 	) );
 
@@ -28,7 +27,7 @@ function recently_modified_register_block() {
      * plugin_dir_path( MY_PLUGIN ) . 'languages' ) ). For details see
      * https://make.wordpress.org/core/2018/11/09/new-javascript-i18n-support-in-wordpress/
      */
-    wp_set_script_translations( 'gutenberg-examples-01', 'gutenberg-examples' );
+    wp_set_script_translations( 'bip-recently-modified-block', 'bip-pages' );
   }
 
 }

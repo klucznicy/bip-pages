@@ -1,9 +1,3 @@
-<style>
-ul {
-  list-style: disc;
-  padding-left: 1em;
-}
-</style>
 <h1><?php esc_html_e( 'BIP Help & Checklist', 'bip-pages' ) ?></h1>
 
 <p>Poniżej opisujemy jakie informacje muszą, a jakie mogą znaleźć się w BIP organizacji pozarządowej.</p>

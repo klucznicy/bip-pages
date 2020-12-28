@@ -59,3 +59,9 @@ form.bip-search input[type=search] {
 img.bip-widget-logo {
   width: 250px;
 }
+
+/** settings pages styles **/
+.bip_page_bip-pages-checklist #wpbody-content ul {
+  list-style: disc;
+  padding-left: 1em;
+}

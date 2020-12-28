@@ -222,6 +222,7 @@ function warn_about_username_display_format() {
 
     $message = wp_kses(
       sprintf(
+        /* translators: %s is replaced with URL poitning to wp-admin/profile.php */
         __( 'It seems your username is displayed as something other than first and last name. For use on BIP Pages, please add your first and last name and change your display name in <a href="%s">your profile settings</a>.', 'bip-pages' ),
         esc_url( $url )
       ),

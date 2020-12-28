@@ -5,7 +5,7 @@ namespace BipPages;
 function add_basic_main_page_data_fallback( $content ) {
   $post = get_post();
 
-  if ( $post->ID == get_bip_main_page() && !use_block_editor_for_post( $post->ID ) ) {
+  if ( $post->ID == get_bip_main_page() && !has_block( 'bip-pages/org-info' ) ) {
     $options = get_option( Settings\OPTION_NAME );
     $bip_logo_url = plugin_dir_url( __FILE__ ) . 'assets/bip-logos/bip-full-color-pl_min.png';
     $bip_instruction_url = get_permalink( get_bip_instruction_page() );

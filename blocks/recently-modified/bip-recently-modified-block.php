@@ -1,4 +1,5 @@
 <?php
+namespace BipPages;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -18,7 +19,7 @@ function recently_modified_register_block() {
 
 	register_block_type( 'bip-pages/recently-modified', array(
 		'editor_script' => 'bip-recently-modified-block',
-		'render_callback' => 'recently_modified_dynamic_render_callback'
+		'render_callback' => __NAMESPACE__ . '\recently_modified_dynamic_render_callback'
 	) );
 
   if ( function_exists( 'wp_set_script_translations' ) ) {
@@ -31,7 +32,7 @@ function recently_modified_register_block() {
   }
 
 }
-add_action( 'init', 'recently_modified_register_block' );
+add_action( 'init', __NAMESPACE__ . '\recently_modified_register_block' );
 
 function recently_modified_dynamic_render_callback( $block_attributes, $content ) {
 		ob_start();

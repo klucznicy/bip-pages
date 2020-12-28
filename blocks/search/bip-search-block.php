@@ -1,4 +1,5 @@
 <?php
+namespace BipPages;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -26,7 +27,7 @@ function search_register_block() {
 	register_block_type( 'bip-pages/search', array(
 		'editor_script' => 'bip-search-block',
 		'editor_style' => 'bip-search-block-editor',
-		'render_callback' => 'search_dynamic_render_callback'
+		'render_callback' => __NAMESPACE__ . '\search_dynamic_render_callback'
 	) );
 
   if ( function_exists( 'wp_set_script_translations' ) ) {
@@ -39,11 +40,11 @@ function search_register_block() {
   }
 
 }
-add_action( 'init', 'search_register_block' );
+add_action( 'init', __NAMESPACE__ . '\search_register_block' );
 
 function search_dynamic_render_callback( $block_attributes, $content ) {
 
-	$options = get_option( BipPages\Settings\OPTION_NAME );
+	$options = get_option( Settings\OPTION_NAME );
 
 	ob_start();
 	include( __DIR__ . '/../../templates/bip-search-form.php' );

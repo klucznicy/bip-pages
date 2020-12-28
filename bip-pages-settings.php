@@ -30,6 +30,7 @@ function render_admin_page() {
 }
 
 function render_checklist_page() {
+  // @TODO: Possibly translate into English. Polish version only for now
   include( "templates/bip-page-checklist-template.php" );
 }
 

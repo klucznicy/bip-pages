@@ -1,4 +1,5 @@
 <?php
+namespace BipPages;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -26,7 +27,7 @@ function org_info_register_block() {
 	register_block_type( 'bip-pages/org-info', array(
 		'editor_script' => 'bip-org-info-block',
     'editor_style' => 'bip-org-info-block-editor',
-		'render_callback' => 'org_info_dynamic_render_callback'
+		'render_callback' => __NAMESPACE__ . '\org_info_dynamic_render_callback'
 	) );
 
   if ( function_exists( 'wp_set_script_translations' ) ) {
@@ -39,10 +40,10 @@ function org_info_register_block() {
   }
 
 }
-add_action( 'init', 'org_info_register_block' );
+add_action( 'init', __NAMESPACE__ . '\org_info_register_block' );
 
 function org_info_dynamic_render_callback( $block_attributes, $content ) {
-		$options = get_option( BipPages\Settings\OPTION_NAME );
+		$options = get_option( Settings\OPTION_NAME );
 
 		ob_start();
 		include( __DIR__ . '/../../templates/bip-org-info-template.php' );

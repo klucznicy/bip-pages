@@ -52,7 +52,7 @@ Please submit a new issue in [BIP for Wordpress' github repo](https://github.com
 == Upgrade Notice ==
 
 = 1.2.0 =
-*
+Plugin now includes editor blocks for BIP pages, mainly for use on the BIP main page: Org Info, Search, and Recently Modified.
 
 = 1.1.1 =
 Corrects bugs introduced in preparation for Wordpress release.

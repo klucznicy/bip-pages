@@ -4,7 +4,7 @@ Donate link: https://klucznicy.org.pl/darowizny/
 Tags: ngo, government, Poland
 Requires at least: 5.0
 Tested up to: 5.6
-Stable tag: 1.1.1
+Stable tag: 1.2.0
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -39,10 +39,20 @@ Please submit a new issue in [BIP for Wordpress' github repo](https://github.com
 
 == Changelog ==
 
+= 1.2.0 =
+* Key modules of BIP main page are now editor Blocks (Org Info, Search, and Recently Modified)
+* Added redirect from /bip/ to BIP main page
+* Added ability to select BIP main page as site front page
+* Added help & instructions on what is required to be published in BIP by law
+* Removed automatic widget creation (buggy, and conflicts with other plugins)
+
 = 1.1.1 =
 * Handful of various bug fixes
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+*
 
 = 1.1.1 =
 Corrects bugs introduced in preparation for Wordpress release.

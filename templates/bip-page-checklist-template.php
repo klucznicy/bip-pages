@@ -104,6 +104,16 @@
 </ul>
 
 <p>Powyższy obowiązek wprowadza <a href="https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20190000848">ustawa o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych</a>.</p>
+
+<h3>Narzędzia pomocne w zapewnieniu dostępności</h3>
+
+<p>Szereg świetnych narzędzi oferuje <a href="https://lepszyweb.pl/">Pracownia Dostępności Cyfrowej</a>. Zachęcamy do skorzystania z:</p>
+<ul>
+  <li><a href="https://wcag.lepszyweb.pl/">Jak spełnić WCAG, przewodnik po wymogach dostęności</a></li>
+  <li><a href="https://lepszyweb.pl/andi/help/install.html">ANDI, narzędzie do testowania dostępności</a> (bezpłatne)</li>
+  <li><a href="https://lepszyweb.pl/walidator">ALLY, walidator dostępności</a> (płatny)></li>
+</ul>
+
 </section>
 
 <section id="podstawa-prawna">

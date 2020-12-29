@@ -281,3 +281,16 @@ function get_bip_instruction_page() {
 function set_bip_instruction_page( $id ) {
   return Settings\set_option_value( 'instruction_id', $id );
 }
+
+/** schema.org microdata **/
+function add_schema_document_itemscope( $content ) {
+  global $post;
+
+  // only proceed if user is editing a BIP page
+  if ( get_post_type( $post ) == 'bip' ) {
+      $content = "<div itemscope itemtype='http://schema.org/DigitalDocument'>{$content}</div>";
+  }
+
+  return $content;
+}
+add_filter('the_content', __NAMESPACE__ . '\add_schema_document_itemscope' );

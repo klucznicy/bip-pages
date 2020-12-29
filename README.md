@@ -4,9 +4,9 @@ A Wordpress plugin for easy creation of Polish public information bulletin (Biul
 
 Available in Polish and in English.
 
-The plugin adds a new type of page to your Wordpress installagtion, called a "BIP page".
+The plugin adds a new type of page to your Wordpress installation, called a "BIP page".
 
-In accordance with the Polish public information access act ([ustawa o dostępie do informacji publicznej](http://prawo.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20011121198)), each BIP page displayes the following information in its footer:
+In accordance with the Polish public information access act ([ustawa o dostępie do informacji publicznej](http://prawo.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20011121198)), each BIP page displays the following information in its footer:
 * the date of its creation,
 * the date of its last modification,
 * its author.
@@ -15,7 +15,13 @@ Additionally, the extension automatically creates a rudimentary editable main pa
 
 # Installation
 
-Download this repository into your Wordpress installation's `wp-content/plugins/` directory and activate the plugin in your admin panel.
+We recommend installing directly from Wordpress' "Add new plugin" page in the admin panel or downloading from [the BIP Pages plugin page on Wordpress.org](https://wordpress.org/plugins/bip-pages/).
+
+This will get you the latest stable version of this plugin.
+
+You can also download this repository into your Wordpress installation's `wp-content/plugins/` directory and activate the plugin in your admin panel.
+
+Note: latest `master` **does not** necessarily contain stable and bug-free code. Use caution.
 
 # Copyright
 

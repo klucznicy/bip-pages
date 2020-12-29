@@ -19,3 +19,5 @@
 		<?= esc_html__( 'BIP pages usage manual', 'bip-pages' ) ?>
 	</a>
 </p>
+
+<?php include( 'bip-search-form.php' ); ?>

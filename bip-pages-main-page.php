@@ -12,7 +12,6 @@ function add_basic_main_page_data_fallback( $content ) {
 
     ob_start();
     include( __DIR__ . '/templates/bip-main-template.php' );
-    include( __DIR__ . '/templates/bip-search-form.php' );
     echo $content;
     $content = ob_get_clean();
   }

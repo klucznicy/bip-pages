@@ -1,0 +1,17 @@
+ul.bip-recently-modified-list {
+  margin-left: 1em;
+}
+
+.bip-recently-modified-header {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.bip-recently-modified-placeholder {
+  display: inline-block;
+  background-color: #ccc;
+  width: 150px;
+  margin-left: 0.5em;
+  font-size: 60%;
+  color: #ccc;
+}

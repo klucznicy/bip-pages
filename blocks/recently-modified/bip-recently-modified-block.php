@@ -17,8 +17,16 @@ function recently_modified_register_block() {
 		filemtime( plugin_dir_path( __FILE__ ) . 'bip-recently-modified-block.js' )
 	);
 
+	wp_register_style(
+  		'bip-recently-modified-block-editor',
+  		plugins_url( 'bip-recently-modified-block-editor.css', __FILE__ ),
+  		array( 'wp-edit-blocks' ),
+  		filemtime( plugin_dir_path( __FILE__ ) . 'bip-recently-modified-block-editor.css' )
+  	);
+
 	register_block_type( 'bip-pages/recently-modified', array(
 		'editor_script' => 'bip-recently-modified-block',
+		'editor_style' => 'bip-recently-modified-block-editor',
 		'render_callback' => __NAMESPACE__ . '\recently_modified_dynamic_render_callback'
 	) );
 

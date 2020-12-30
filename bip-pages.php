@@ -24,23 +24,11 @@ namespace BipPages;
 const CURRENT_VERSION = '1.2.0';
 
 function plugin_init() {
-  load_plugin_textdomain(
-    'bip-pages',
-    false,
-    basename( dirname( __FILE__ ) ) . '/languages'
-  );
-
   include_submodules();
-
-  add_action('wp_enqueue_scripts', __NAMESPACE__ . '\register_css');
-  add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\register_css' );
 
   include( 'bip-pages-update.php' );
 }
 add_action('plugins_loaded', __NAMESPACE__ . '\plugin_init');
-
-register_activation_hook( __FILE__, __NAMESPACE__ . '\activate' );
-register_deactivation_hook( __FILE__, __NAMESPACE__ . '\deactivate' );
 
 function include_submodules() {
   include( 'bip-pages-main-page.php' );
@@ -51,6 +39,9 @@ function include_submodules() {
   include( 'bip-pages-activation.php' );
   include( 'blocks/bip-blocks.php' );
 }
+
+register_activation_hook( __FILE__, __NAMESPACE__ . '\activate' );
+register_deactivation_hook( __FILE__, __NAMESPACE__ . '\deactivate' );
 
 function activate() {
   add_option('Activated_Plugin','bip-pages'); // deleted later in post_activation_flow
@@ -74,12 +65,23 @@ function deactivate() {
   convert_page_types();
 }
 
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\register_css');
+add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\register_css' );
 function register_css() {
   wp_enqueue_style(
     'bip-pages',
     plugin_dir_url( __FILE__ ) . 'css/style.css',
     array(),
     CURRENT_VERSION
+  );
+}
+
+add_action( 'init', __NAMESPACE__ . '\load_textdomain' );
+function load_textdomain() {
+  load_plugin_textdomain(
+    'bip-pages',
+    false,
+    dirname( plugin_basename( __FILE__ ) ) . '/languages'
   );
 }
 

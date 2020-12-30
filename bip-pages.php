@@ -151,7 +151,8 @@ function add_footer( $content = '' ) {
 
   $creation_tag = "<time datetime='{$creation_time}'>";
   $creation_tag .= sprintf(
-    esc_html( '%s at %s', 'bip-pages' ),
+    /* translators: %1$s is replaced with date, %2$s is replaced with time */
+    esc_html( __('%1$s at %2$s', 'bip-pages') ),
     get_the_date(),
     get_the_time()
   );
@@ -159,7 +160,7 @@ function add_footer( $content = '' ) {
 
   $last_modification_tag = "<time datetime='{$last_mod_time}'>";
   $last_modification_tag .= sprintf(
-    esc_html( '%s at %s', 'bip-pages' ),
+    esc_html( __('%1$s at %2$s', 'bip-pages') ),
     get_the_modified_date(),
     get_the_modified_time()
   );

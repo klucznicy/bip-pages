@@ -12,7 +12,7 @@ namespace BipPages;
  * Plugin Name: BIP Pages
  * Plugin URI: https://klucznicy.org.pl/oprogramowanie/bip-pages/
  * Description: A plugin adding BIP (Biuletyn Informacji Publicznej) functionality to WordPress
- * Version: 1.2.0
+ * Version: 1.2.1
  * Author: Stowarzyszenie Klucznicy
  * Author URI: https://klucznicy.org.pl/
  * Text Domain: bip-pages
@@ -21,7 +21,7 @@ namespace BipPages;
  * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
-const CURRENT_VERSION = '1.2.0';
+const CURRENT_VERSION = '1.2.1';
 
 function plugin_init() {
   include_submodules();

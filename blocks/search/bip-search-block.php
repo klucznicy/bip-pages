@@ -43,12 +43,8 @@ function search_register_block() {
 add_action( 'init', __NAMESPACE__ . '\search_register_block' );
 
 function search_dynamic_render_callback( $block_attributes, $content ) {
-
-	$options = get_option( Settings\OPTION_NAME );
-
 	ob_start();
 	include( __DIR__ . '/../../templates/bip-search-form.php' );
-	$el = ob_get_clean();
 
-    return $el;
+	return ob_get_clean();
 }

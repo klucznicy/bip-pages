@@ -36,12 +36,15 @@ form.bip-search input[type=search] {
   width: 100%;
 }
 
-.bip-address {
+.bip-org-info {
   margin: 1em 0;
+}
+
+.bip-org-info address {
   font-style: normal;
 }
 
-.bip-address p {
+.bip-org-info p {
   margin: 0;
 }
 

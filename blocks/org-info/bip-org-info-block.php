@@ -43,11 +43,8 @@ function org_info_register_block() {
 add_action( 'init', __NAMESPACE__ . '\org_info_register_block' );
 
 function org_info_dynamic_render_callback( $block_attributes, $content ) {
-		$options = get_option( Settings\OPTION_NAME );
-
 		ob_start();
 		include( __DIR__ . '/../../templates/bip-org-info-template.php' );
-		$el = ob_get_clean();
 
-    return $el;
+		return  ob_get_clean();
 }

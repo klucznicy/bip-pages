@@ -21,6 +21,8 @@ namespace BipPages;
  * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
+const CURRENT_VERSION = '1.2.0';
+
 function plugin_init() {
   load_plugin_textdomain(
     'bip-pages',
@@ -32,6 +34,8 @@ function plugin_init() {
 
   add_action('wp_enqueue_scripts', __NAMESPACE__ . '\register_css');
   add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\register_css' );
+
+  include( 'bip-pages-update.php' );
 }
 add_action('plugins_loaded', __NAMESPACE__ . '\plugin_init');
 
@@ -241,11 +245,7 @@ add_action( 'admin_notices', __NAMESPACE__ . '\warn_about_username_display_forma
 
 /** main page **/
 function get_bip_main_page() {
-  return Settings\get_option_value( 'id' );
-}
-
-function set_bip_main_page( $id ) {
-  return Settings\set_option_value( 'id', $id );
+  return get_option( 'bip_pages_main_page_id' );
 }
 
 function add_bip_main_page_to_main_page_dropdown( $output, $parsed_args, $pages ){
@@ -275,9 +275,9 @@ add_filter( 'wp_dropdown_pages', __NAMESPACE__ . '\add_bip_main_page_to_main_pag
 
 /** instruction page **/
 function get_bip_instruction_page() {
-  return Settings\get_option_value( 'instruction_id' );
+  return get_option( 'bip_pages_instruction_id' );
 }
 
 function set_bip_instruction_page( $id ) {
-  return Settings\set_option_value( 'instruction_id', $id );
+  return update_option( 'bip_pages_instruction_id', $id );
 }

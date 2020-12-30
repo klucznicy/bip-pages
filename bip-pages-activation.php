@@ -44,17 +44,11 @@ function create_functional_page( $title, $content = '' ) {
 
 function create_main_page() {
   $title = __( 'BIP Main Page', 'bip-pages' );
-  $bip_instruction_url = get_permalink( get_bip_instruction_page() );
 
-  // Polish only for now
-  ob_start();
-  include( 'boilerplate-text/bip-main-page-pl.php');
-  $content = ob_get_clean();
-
-  $main_page_id = create_functional_page( $title, $content );
+  $main_page_id = create_functional_page( $title, get_main_page_default_content() );
 
   if ( !is_wp_error( $main_page_id ) ) {
-    set_bip_main_page( $main_page_id );
+    update_option( 'bip_pages_main_page_id', $main_page_id );
   }
 }
 
@@ -67,9 +61,7 @@ function create_instructions_page() {
   $instruction_page_id = create_functional_page( $title, $instructions );
 
   if ( !is_wp_error( $instruction_page_id ) ) {
-    $option = get_option( Settings\OPTION_NAME, array() );
-    $option['instruction_id'] = $instruction_page_id;
-    update_option( Settings\OPTION_NAME, $option );
+    update_option( 'bip_pages_instruction_id', $instruction_page_id );
   }
 }
 

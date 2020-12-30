@@ -1,4 +1,4 @@
-<?= settings_errors( \BipPages\Settings\OPTION_NAME ); ?>
+<?= settings_errors(); ?>
 
 <div class="wrap">
   <h1><?= esc_html__('BIP Pages Settings', 'bip-pages') ?></h1>

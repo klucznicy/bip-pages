@@ -2,7 +2,8 @@
 namespace BipPages\Settings;
 
 const PAGE_NAME = 'bip-pages-admin';
-const OPTION_NAME = 'bip-pages';
+const OPTION_GROUP = 'bip-pages';
+const OPT_LAST_VERSION = 'bip_pages_last_version';
 
 function register_options_page() {
   add_submenu_page(
@@ -55,34 +56,73 @@ add_action( 'admin_notices', __NAMESPACE__ . '\notice_success' );
 */
 function page_init() {
   register_setting(
-    'bip-pages', // Option group
-    OPTION_NAME, // Option name
-    __NAMESPACE__ . '\sanitize'
+    OPTION_GROUP,
+    'bip_pages_org_name', // Option name
+    array(
+      'type' => 'string',
+      'sanitize_callback' => 'sanitize_text_field',
+    )
   );
 
   register_setting(
-    'bip-pages', // Option group
-    'bip-pages-edit-access-role', // Option name
-    __NAMESPACE__ . '\validate_access_role'
+    OPTION_GROUP,
+    'bip_pages_address', // Option name
+    array(
+      'type' => 'string',
+      'sanitize_callback' => 'sanitize_textarea_field',
+    )
   );
 
   register_setting(
-    'bip-pages', // Option group
-    'bip-pages-publish-access-role', // Option name
-    __NAMESPACE__ . '\validate_access_role'
+    OPTION_GROUP,
+    'bip_pages_editor', // Option name
+    array(
+      'type' => 'string',
+      'sanitize_callback' => 'sanitize_text_field',
+    )
   );
 
   register_setting(
-    'bip-pages', // Option group
-    'bip-pages-delete-access-role', // Option name
-    __NAMESPACE__ . '\validate_access_role'
+    OPTION_GROUP,
+    'bip_pages_email', // Option name
+    array(
+      'type' => 'string',
+      'sanitize_callback' => 'sanitize_email',
+    )
+  );
+
+  register_setting(
+    OPTION_GROUP,
+    'bip_pages_phone', // Option name
+    array(
+      'type' => 'string',
+      'sanitize_callback' => __NAMESPACE__ . '\sanitize_phone',
+    )
+  );
+
+  register_setting(
+    OPTION_GROUP,
+    'bip_pages_main_page_id', // Option name
+    array(
+      'type' => 'integer',
+      'sanitize_callback' => __NAMESPACE__ . '\sanitize_main_page_id',
+    )
+  );
+
+  register_setting(
+    OPTION_GROUP,
+    'bip_pages_instruction_id', // Option name
+    array(
+      'type' => 'integer',
+      'sanitize_callback' => __NAMESPACE__ . '\sanitize_instruction_id',
+    )
   );
 
   add_settings_section(
     'bip_pages_settings_main_page', // ID
     __('BIP Main Page settings', 'bip-pages'), // Title
     '', // Callback (for help text if needed)
-    'bip-pages-admin' // Page
+    PAGE_NAME // Page
   );
 
   add_settings_field(
@@ -94,7 +134,15 @@ function page_init() {
   );
 
   add_settings_field(
-    'bip_pages_main_page_address',
+    'bip_pages_org_name',
+    __('Organization Name', 'bip-pages'),
+    __NAMESPACE__ . '\main_page_org_name_callback',
+    PAGE_NAME,
+    'bip_pages_settings_main_page'
+  );
+
+  add_settings_field(
+    'bip_pages_address',
     __('Organization Address', 'bip-pages'),
     __NAMESPACE__ . '\main_page_address_callback',
     PAGE_NAME,
@@ -102,7 +150,7 @@ function page_init() {
   );
 
   add_settings_field(
-    'bip_pages_main_page_email',
+    'bip_pages_email',
     __('E-Mail Address', 'bip-pages'),
     __NAMESPACE__ . '\main_page_email_callback',
     PAGE_NAME,
@@ -110,15 +158,15 @@ function page_init() {
   );
 
   add_settings_field(
-    'bip_pages_main_page_phone',
+    'bip_pages_phone',
     __('Phone Number', 'bip-pages'),
-    __NAMESPACE__ . '\main_page_phone_callback',
+    __NAMESPACE__ . '\phone_callback',
     PAGE_NAME,
     'bip_pages_settings_main_page'
   );
 
   add_settings_field(
-    'bip_pages_main_page_rep',
+    'bip_pages_editor',
     __('Name of representative', 'bip-pages'),
     __NAMESPACE__ . '\main_page_rep_callback',
     PAGE_NAME,
@@ -129,7 +177,7 @@ function page_init() {
     'bip_pages_settings_instruction_page', // ID
     __('BIP instruction page settings', 'bip-pages'), // Title
     '', // Callback (for help text if needed)
-    'bip-pages-admin' // Page
+    PAGE_NAME
   );
 
   add_settings_field(
@@ -145,31 +193,27 @@ add_action( 'admin_init', __NAMESPACE__ . '\page_init' );
 
 /**
 * Sanitize each setting field as needed
-*
-* @param array $input Contains all settings fields as array keys
 */
-function sanitize( $input ) {
-  $sanitized_input = array();
+function sanitize_id( $value, $option ) {
+  if ( is_numeric( $value ) && /* post exists? */ get_post_status( $value ) !== false ) {
+    return $value;
+  } else {
+    /* translators: %s is internal option identifired, either "id" or "instruction_id" */
+    $msg = sprintf( esc_html__('Invalid page ID given for %s', 'bip-pages'), $option);
 
-  foreach ( $input as $option => $value ) {
-    switch ( $option ) {
-      case 'id':
-      case 'instruction_id':
-        if ( is_numeric( $value ) && /* post exists? */ get_post_status( $value ) !== false ) {
-          $sanitized_input[$option] = $value;
-        } else {
-          /* translators: %s is internal option identifired, either "id" or "instruction_id" */
-          $msg = sprintf( esc_html__('Invalid page ID given for %s', 'bip-pages'), $option);
-          add_settings_error( OPTION_NAME, $option, $msg );
-        }
-        break;
-      case 'address':
-        $sanitized_input['address'] = sanitize_textarea_field( $input['address'] );
-        break;
-      case 'email':
-        $sanitized_input['email'] = sanitize_email( $input['email'] );
-        break;
-      case 'phone':
+    add_settings_error( $option, 'invalid-id', $msg );
+  }
+}
+
+function sanitize_main_page_id( $value ) {
+  return sanitize_id( $value, 'bip_pages_main_page_id' );
+}
+
+function sanitize_instruction_id( $value ) {
+  return sanitize_id( $value, 'bip_pages_instruction_id' );
+}
+
+function sanitize_phone( $value ) {
         $phone = filter_var( $value, FILTER_SANITIZE_NUMBER_INT );
         $phone = str_replace("-", "", $phone );
 
@@ -177,21 +221,14 @@ function sanitize( $input ) {
 
         if ( $length == 9 ) {
           // assume Polish number for now
-          $sanitized_input['phone'] = '+48' . $phone;
+          return '+48' . $phone;
         } elseif ( $length == 12 && strpos( $phone, '+' ) === 0 ) {
-          $sanitized_input['phone'] = $phone;
+          return $phone;
         } elseif ( $length == 13 && strpos( $phone, '00' ) === 0 ) {
-          $sanitized_input['phone'] = $phone;
+          return $phone;
         } else {
-          add_settings_error( OPTION_NAME, $option, esc_html__('Invalid phone number given.', 'bip-pages') );
+          add_settings_error( 'bip_pages_phone', $option, esc_html__('Invalid phone number given.', 'bip-pages') );
         }
-        break;
-      default:
-        $sanitized_input[$option] = sanitize_text_field( $value );
-    }
-  }
-
-  return $sanitized_input;
 }
 
 function validate_access_role( $role ) {
@@ -202,8 +239,8 @@ function main_page_id_callback() {
   $args = [
     'show_option_none' => esc_html__('Not selected', 'bip-pages'),
     'option_none_value' => 0,
-    'name' => OPTION_NAME . "[id]",
-    'id' => OPTION_NAME . "[id]",
+    'name' => 'bip_pages_main_page_id',
+    'id' => 'bip_pages_main_page_id',
     'selected' => \BipPages\get_bip_main_page(),
     'post_type' => 'bip'
   ];
@@ -224,8 +261,8 @@ function instruction_page_callback() {
   $args = [
     'show_option_none' => esc_html__('Not selected', 'bip-pages'),
     'option_none_value' => 0,
-    'name' => OPTION_NAME . "[instruction_id]",
-    'id' => OPTION_NAME . "[instruction_id]",
+    'name' => 'bip_pages_instruction_id',
+    'id' => 'bip_pages_instruction_id',
     'selected' => \BipPages\get_bip_instruction_page(),
     'post_type' => 'bip'
   ];
@@ -242,36 +279,37 @@ function instruction_page_callback() {
   }
 }
 
+function main_page_org_name_callback() {
+  build_input('bip_pages_org_name', 'text', esc_attr__('Association...', 'bip-pages'));
+}
+
 function main_page_address_callback() {
-  $id = 'address';
-  $option = OPTION_NAME;
-  $values = get_option( $option );
-  $id_safe = esc_attr( $id );
+  $option = 'bip_pages_address';
   $placeholder = esc_attr__( 'The address of your organization', 'bip-pages' );
 
   $element = "<textarea
-               id='{$option}[{$id_safe}]' name='{$option}[{$id_safe}]'
+               id='{$option}' name='{$option}'
                placeholder='{$placeholder}' >";
   $element .= '%s';
   $element .= '</textarea>';
 
-  printf( $element, !empty( $values[$id] ) ? esc_textarea( $values[$id] ) : '' );
+  printf( $element, get_option( $option, '' ) );
 }
 
 function main_page_rep_callback() {
-  build_input('rep', 'text', esc_attr__('Full name of a BIP editor', 'bip-pages'));
+  build_input('bip_pages_editor', 'text', esc_attr__('Full name of a BIP editor', 'bip-pages'));
 }
 
 function main_page_email_callback() {
-  build_input('email',
+  build_input('bip_pages_email',
     'email',
     esc_attr__('Email to a BIP editor', 'bip-pages')
   );
 }
 
-function main_page_phone_callback() {
+function phone_callback() {
   build_input(
-    'phone',
+    'bip_pages_phone',
     'tel',
     esc_attr__('Phone number to your organization', 'bip-pages'),
     '[0-9 +]+'
@@ -295,27 +333,15 @@ function get_settings_url( Array $options = array() ) {
   return admin_url( 'edit.php?' . $query );
 }
 
-function build_input( $id, $type = 'text', $placeholder = '', $pattern = false ) {
-  $option = OPTION_NAME;
-  $values = get_option( $option );
-  $id_safe = esc_attr($id);
+function build_input( $option, $type = 'text', $placeholder = '', $pattern = false ) {
+  $value = esc_attr( get_option( $option ) );
+  $id_safe = esc_attr( $option );
 
-  $element = "<input type='{$type}' value='%s'
-               id='{$option}[{$id_safe}]' name='{$option}[{$id_safe}]'
+  $element = "<input type='{$type}' value='{$value}'
+               id='{$id_safe}' name='{$id_safe}'
                placeholder='{$placeholder}' ";
   $element .= $pattern ? "pattern='{$pattern}'" : '';
   $element .= "/>";
 
-  printf( $element, !empty( $values[$id] ) ? $values[$id] : '' );
-}
-
-function get_option_value( $opt ) {
-  $options = get_option( OPTION_NAME );
-  return isset( $options[$opt] ) ? $options[$opt] : false;
-}
-
-function set_option_value( $opt, $value ) {
-  $option = get_option( OPTION_NAME, array() );
-  $option[$opt] = $value;
-  return update_option( OPTION_NAME, $option );
+  echo $element;
 }

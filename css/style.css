@@ -13,6 +13,13 @@ article.type-bip .entry-title > a {
   column-count: 2;
 }
 
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .bip-footer {
+    column-count: 1;
+  }
+}
+
 .bip-footer p {
   break-inside: avoid;
   page-break-inside: avoid;

@@ -5,6 +5,8 @@ const PAGE_NAME = 'bip-pages-admin';
 const OPTION_GROUP = 'bip-pages';
 const OPT_LAST_VERSION = 'bip_pages_last_version';
 
+const USER_META_NOTICE_DISPLAY_NAME = 'display-username-invalid';
+
 function register_options_page() {
   add_submenu_page(
     'edit.php?post_type=bip',
@@ -50,6 +52,66 @@ function notice_success() {
   }
 }
 add_action( 'admin_notices', __NAMESPACE__ . '\notice_success' );
+
+function enqueue_admin_script( $hook ) {
+    wp_enqueue_script(
+      'bip_pages_admin_script',
+      plugin_dir_url( __FILE__ ) . 'js/admin_notices.js',
+      array( 'jquery' ),
+      '1.0.411111',
+      true
+    );
+}
+add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_admin_script' );
+
+function dismiss_display_name_notice() {
+  if ( !empty( $_POST['notice'] ) && $_POST['notice'] == USER_META_NOTICE_DISPLAY_NAME ) {
+    echo add_user_meta( get_current_user_id(), USER_META_NOTICE_DISPLAY_NAME, true );
+    wp_die();
+  } else {
+    echo 0;
+    wp_die();
+  }
+}
+add_action( 'wp_ajax_bip_pages_dismiss_notice', __NAMESPACE__ . '\dismiss_display_name_notice' );
+
+
+function has_valid_username_display_format() {
+  $user = wp_get_current_user();
+
+  return
+    $user->first_name &&
+    $user->last_name &&
+    (
+      $user->display_name == $user->first_name . ' ' . $user->last_name ||
+      $user->display_name == $user->last_name . ' ' . $user->first_name
+    );
+}
+
+function warn_about_username_display_format() {
+  if ( !has_valid_username_display_format() && empty( get_user_meta( get_current_user_id(), USER_META_NOTICE_DISPLAY_NAME, true ) ) ) {
+    $class = 'bip-pages-display-username-invalid-notice notice notice-warning is-dismissible';
+
+    $url = admin_url( 'profile.php' );
+
+    $message = wp_kses(
+      sprintf(
+        /* translators: %s is replaced with URL poitning to wp-admin/profile.php */
+        __( 'It seems your username is displayed as something other than first and last name. For use on BIP Pages, please add your first and last name and change your display name in <a href="%s">your profile settings</a>.', 'bip-pages' ),
+        esc_url( $url )
+      ),
+      array(
+        'a' => array(
+            'href' => array(),
+            'title' => array()
+        )
+      )
+    );
+
+    printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message );
+  }
+}
+add_action( 'admin_notices', __NAMESPACE__ . '\warn_about_username_display_format' );
 
 /**
 * Register and add settings

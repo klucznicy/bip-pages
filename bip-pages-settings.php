@@ -58,7 +58,7 @@ function enqueue_admin_script( $hook ) {
       'bip_pages_admin_script',
       plugin_dir_url( __FILE__ ) . 'js/admin_notices.js',
       array( 'jquery' ),
-      '1.0.411111',
+      \BipPages\CURRENT_VERSION,
       true
     );
 }

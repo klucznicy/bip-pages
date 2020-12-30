@@ -75,7 +75,12 @@ function deactivate() {
 }
 
 function register_css() {
-  wp_enqueue_style( 'bip-pages', plugin_dir_url( __FILE__ ) . 'css/style.css' );
+  wp_enqueue_style(
+    'bip-pages',
+    plugin_dir_url( __FILE__ ) . 'css/style.css',
+    array(),
+    CURRENT_VERSION
+  );
 }
 
 /** BIP page type registration **/
@@ -193,7 +198,8 @@ function enqueue_editor_notices() {
   wp_enqueue_script(
         'bip-editor-notices',
         plugin_dir_url( __FILE__ ) . '/js/editor_notices.js',
-        array( 'wp-notices', 'wp-i18n', 'wp-editor', 'jquery' )
+        array( 'wp-notices', 'wp-i18n', 'wp-editor', 'jquery' ),
+        CURRENT_VERSION
     );
 
     $vars = array(

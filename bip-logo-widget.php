@@ -66,6 +66,9 @@ class BIP_Logo_Widget extends WP_Widget {
         if ( $instance['variant'] == 'simple' ) {
           // simple variant does not support language
           // $instance['language'] = '';
+        } elseif ( $new_instance['variant'] == 'full' && $old_instance['variant'] == 'simple' ) {
+          // when switching back from simple to full, assume PL
+          $instance['language'] = 'pl';
         } elseif ( in_array( $new_instance['language'], $this->image_languages ) ) {
           $instance['language'] = $new_instance['language'];
         } else {

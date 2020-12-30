@@ -32,11 +32,11 @@ article.type-bip .entry-title > a {
 }
 
 form.bip-search {
-  margin: 1em 0;
+  margin-top: 1em;
 }
 
 form.bip-search label {
-  width: 80%;
+  max-width: 80%;
   float: left;
   margin-right: 0.5em;
 }
@@ -51,6 +51,7 @@ form.bip-search input[type=search] {
 
 .bip-org-info address {
   font-style: normal;
+  font-family: inherit;
 }
 
 .bip-org-info p {

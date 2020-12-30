@@ -44,6 +44,7 @@ Please submit a new issue in [BIP for Wordpress' github repo](https://github.com
 * Added redirect from /bip/ to BIP main page
 * Added ability to select BIP main page as site front page
 * Added help & instructions on what is required to be published in BIP by law
+* Added schema.org microdata markup for better consumption by machines/bots
 * Removed automatic widget creation (buggy, and conflicts with other plugins)
 
 = 1.1.1 =

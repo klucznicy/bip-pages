@@ -1,7 +1,7 @@
 <?php
 namespace BipPages;
 /**
- * BIP for Wordpress
+ * BIP Pages
  *
  * @package     bip-pages
  * @author      Łukasz Garczewski
@@ -12,7 +12,7 @@ namespace BipPages;
  * Plugin Name: BIP Pages
  * Plugin URI: https://klucznicy.org.pl/oprogramowanie/bip-pages/
  * Description: A plugin adding BIP (Biuletyn Informacji Publicznej) functionality to WordPress
- * Version: 1.1.1
+ * Version: 1.2.0
  * Author: Stowarzyszenie Klucznicy
  * Author URI: https://klucznicy.org.pl/
  * Text Domain: bip-pages

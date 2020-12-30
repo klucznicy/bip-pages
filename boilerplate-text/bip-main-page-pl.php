@@ -2,7 +2,7 @@
 <div class="wp-block-image">
 	<figure class="alignright">
 		<img
-			src="/assets/bip-logos/bip-full-color-pl_min.png"
+			src="<?= plugin_dir_url( __FILE__ ) ?>../assets/bip-logos/bip-full-color-pl_min.png"
 			alt="<?= esc_attr( __( 'Biuletyn Informacji Publicznej', 'bip-pages' ) ) ?>"/>
 	</figure>
 </div>

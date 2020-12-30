@@ -111,7 +111,7 @@
 <ul>
   <li><a href="https://wcag.lepszyweb.pl/">Jak spełnić WCAG, przewodnik po wymogach dostęności</a></li>
   <li><a href="https://lepszyweb.pl/andi/help/install.html">ANDI, narzędzie do testowania dostępności</a> (bezpłatne)</li>
-  <li><a href="https://lepszyweb.pl/walidator">ALLY, walidator dostępności</a> (płatny)></li>
+  <li><a href="https://lepszyweb.pl/walidator">ALLY, walidator dostępności</a> (płatny)</li>
 </ul>
 
 </section>

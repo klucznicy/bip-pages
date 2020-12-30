@@ -1,5 +1,11 @@
 <!-- wp:image {"align":"right"} -->
-<div class="wp-block-image"><figure class="alignright"><img src="http://localhost/wordpress-test/wp-content/plugins/bip-for-wordpress/assets/bip-logos/bip-full-color-pl_min.png" alt=""/></figure></div>
+<div class="wp-block-image">
+	<figure class="alignright">
+		<img
+			src="/assets/bip-logos/bip-full-color-pl_min.png"
+			alt="<?= esc_attr( __( 'Biuletyn Informacji Publicznej', 'bip-pages' ) ) ?>"/>
+	</figure>
+</div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->

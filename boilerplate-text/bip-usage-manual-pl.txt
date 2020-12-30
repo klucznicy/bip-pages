@@ -1,13 +1,15 @@
-W naszym Biuletynie Informacji Publicznej (BIP) publikujemy informacje dotyczące
-prowadzonej przez naszą organizację działalności pożytku publicznego,
-w tym tej finansowanej ze środków publicznych.
+<!-- wp:paragraph -->
+<p>W naszym Biuletynie Informacji Publicznej (BIP) publikujemy informacje dotyczące<br>prowadzonej przez naszą organizację działalności pożytku publicznego, w tym tej finansowanej ze środków publicznych.</p>
+<!-- /wp:paragraph -->
 
-Aby odnaleźć poszukiwane informacje, przejdź na stronę główną naszego BIP i:
+<!-- wp:paragraph -->
+<p>Aby odnaleźć poszukiwane informacje, przejdź na stronę główną naszego BIP i:</p>
+<!-- /wp:paragraph -->
 
-<ol>
-  <li>skorzystaj z wyszukiwarki, wpisując odpowiednią frazę w pole u góry strony, lub
-  <li>skorzystaj z odnośników znajdujących się na stronie.
-</ol>
+<!-- wp:list {"ordered":true} -->
+<ol><li>skorzystaj z wyszukiwarki, wpisując odpowiednią frazę w pole u góry strony, lub</li><li>skorzystaj z odnośników znajdujących się na stronie.</li></ol>
+<!-- /wp:list -->
 
-Jeśli nie znajdziesz poszukiwanej informacji w BIP, skontaktuj się z nami,
-korzystając z adresu mailowego lub numeru telefonu podanego na stronie.
+<!-- wp:paragraph -->
+<p>Jeśli nie znajdziesz poszukiwanej informacji w BIP, skontaktuj się z nami, korzystając z adresu mailowego lub numeru telefonu podanego na stronie.</p>
+<!-- /wp:paragraph -->

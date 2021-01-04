@@ -25,12 +25,10 @@ function convert_page_types() {
 }
 
 function remove_widgets() {
-  // remove widget data
-  delete_option( 'widget_bip-logo' );
-  $active_widgets = get_option( 'sidebars_widgets' );
+  $active_widgets = get_option( 'sidebars_widgets', array() );
 
   foreach ( $active_widgets as $key => $val ) {
-    if ( empty( $val ) || !is_array( $val ) ) {
+    if ( !is_array( $val ) ) {
       continue;
     }
 
@@ -44,6 +42,7 @@ function remove_widgets() {
   }
 
   update_option( 'sidebars_widgets', $active_widgets );
+  delete_option( 'widget_bip-logo' );
 }
 
 add_action( 'admin_notices', __NAMESPACE__ . '\deactivation_notice' );

@@ -16,23 +16,18 @@ add_action( "admin_init", __NAMESPACE__ . "\add_post_meta_boxes" );
 
 function save_post_meta_boxes(){
     global $post;
-    if ( empty( $post->ID ) )
-      return;
 
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
         return;
-    }
-    if ( get_post_status( $post->ID ) === 'auto-draft' ) {
+    } elseif ( empty( $post->ID ) && get_post_status( $post->ID ) === 'auto-draft' ) {
         return;
-    }
-
-    if ( !isset( $_POST[ "_bip_prepared_by" ] ) ) {
+    } elseif ( !isset( $_POST[ "_bip_prepared_by" ] ) ) {
       // check added to avoid errors later
       // should not happen unless request is fiddled with
       return;
     }
 
-    $new_meta_value = sanitize_text_field( $_POST[ '_bip_prepared_by' ] );
+    $sanitized_meta_value = sanitize_text_field( $_POST[ '_bip_prepared_by' ] );
 
     /**
      * validate meta value, i.e.:
@@ -40,11 +35,11 @@ function save_post_meta_boxes(){
      * (2) disallow long content
       * see input element definition in post_meta_box_content_prepared_by()
      */
-    if ( strlen( $new_meta_value ) > 100 ) {
+    if ( strlen( $sanitized_meta_value ) > 100 ) {
       return;
     }
 
-    update_post_meta( $post->ID, '_bip_prepared_by', $new_meta_value );
+    update_post_meta( $post->ID, '_bip_prepared_by', $sanitized_meta_value );
 }
 add_action( 'save_post', __NAMESPACE__ . '\save_post_meta_boxes' );
 

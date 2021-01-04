@@ -16,17 +16,12 @@ add_action( "admin_init", __NAMESPACE__ . "\add_post_meta_boxes" );
 
 function save_post_meta_boxes(){
     global $post;
-    if ( empty( $post->ID ) )
-      return;
 
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
         return;
-    }
-    if ( get_post_status( $post->ID ) === 'auto-draft' ) {
+    } elseif ( empty( $post->ID ) && get_post_status( $post->ID ) === 'auto-draft' ) {
         return;
-    }
-
-    if ( !isset( $_POST[ "_bip_prepared_by" ] ) ) {
+    } elseif ( !isset( $_POST[ "_bip_prepared_by" ] ) ) {
       // check added to avoid errors later
       // should not happen unless request is fiddled with
       return;

@@ -4,6 +4,7 @@
 	'title_li' => '',
 	'post_type' => 'bip',
 	'sort_column' => 'post_modified',
+	'sort_order' => 'desc',
 	'number' => 10
 ] ) ?>
 </ul>
